@@ -8,7 +8,6 @@
     "declaration": false,
     "removeComments": true,
     "strict": true,
-    "experimentalDecorators": true,
-    "esModuleInterop": true
+    "experimentalDecorators": true
   }
 }
