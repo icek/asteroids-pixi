@@ -7,7 +7,7 @@
     "prestart": "rimraf dist",
     "start": "parcel src/index.html --no-cache",
     "prebuild": "rimraf dist",
-    "build": "parcel build src/index.html",
+    "build": "parcel build src/index.html --no-cache",
     "tslint": "tslint -p tsconfig.json"
   },
   "keywords": [],
