@@ -1,0 +1,9 @@
+# Folders
+dist
+node_modules
+.rpt2_cache
+.cache
+.tmp
+
+# Files
+npm-debug.log

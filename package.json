@@ -1,0 +1,38 @@
+{
+  "name": "asteroids.ts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "rollup.asteroids.js",
+  "scripts": {
+    "prestart": "rimraf dist",
+    "start": "parcel src/index.html --no-cache",
+    "prebuild": "rimraf dist",
+    "build": "rollup -c",
+    "postbuild": "rimraf .tmp .rpt2_cache",
+    "tslint": "tslint -p tsconfig.json"
+  },
+  "keywords": [],
+  "author": "Grzegorz Michlicki <grzegorz@michlicki.pl>",
+  "license": "MIT",
+  "dependencies": {
+    "@ash.ts/ash": "^0.9.8",
+    "pixi.js": "^5.0.0"
+  },
+  "devDependencies": {
+    "parcel": "^1.12.3",
+    "rimraf": "^2.6.3",
+    "rollup": "^1.10.1",
+    "rollup-plugin-fill-html": "^1.1.0",
+    "rollup-plugin-html-entry": "^0.2.0",
+    "rollup-plugin-node-resolve": "^4.2.3",
+    "rollup-plugin-terser": "^4.0.4",
+    "rollup-plugin-typescript2": "^0.21.0",
+    "rollup-plugin-url": "^2.2.1",
+    "tslint": "^5.16.0",
+    "tslint-config-airbnb-base": "^0.3.0",
+    "typescript": "^3.4.5"
+  },
+  "browserslist": [
+    "last 1 Chrome version"
+  ]
+}
