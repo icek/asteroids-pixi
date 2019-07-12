@@ -1,7 +1,7 @@
-import { Node, keep } from '@ash.ts/ash';
+import { keep, Node } from '@ash.ts/ash';
 import { Audio, Collision, Position, Spaceship } from '../components';
 
-export class SpaceshipCollisionNode extends Node<SpaceshipCollisionNode> {
+export class SpaceshipCollisionNode extends Node {
   @keep(Spaceship)
   public spaceship!:Spaceship;
   @keep(Position)

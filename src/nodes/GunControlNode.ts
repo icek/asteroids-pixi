@@ -1,7 +1,7 @@
 import { Node, keep } from '@ash.ts/ash';
 import { Audio, Gun, GunControls, Position } from '../components';
 
-export class GunControlNode extends Node<GunControlNode> {
+export class GunControlNode extends Node {
   @keep(GunControls)
   public control!:GunControls;
   @keep(Gun)
