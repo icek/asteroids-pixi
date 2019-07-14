@@ -1,4 +1,4 @@
-import { Entity, EntityStateMachine, Engine } from '@ash.ts/ash';
+import { Engine, Entity, EntityStateMachine } from '@ash.ts/ash';
 import {
   Animation,
   Asteroid,
@@ -17,6 +17,7 @@ import {
   Spaceship,
   WaitForStart,
 } from './components';
+import { GameConfig } from './GameConfig';
 import {
   AsteroidDeathView,
   AsteroidView,
@@ -29,11 +30,12 @@ import {
 import * as Keyboard from './Keyboard';
 
 export class EntityCreator {
-  private engine:Engine;
   private waitEntity!:Entity;
 
-  constructor(engine:Engine) {
-    this.engine = engine;
+  constructor(
+    private engine:Engine,
+    private config:GameConfig,
+  ) {
   }
 
   public destroyEntity(entity:Entity):void {
@@ -47,19 +49,19 @@ export class EntityCreator {
       .add(new GameState())
       .add(new Hud(hud))
       .add(new Display(hud))
-      .add(new Position(400, 25, 0));
+      .add(new Position(this.config.width / 2, 25, 0));
     this.engine.addEntity(gameEntity);
     return gameEntity;
   }
 
   public createWaitForClick():Entity {
-    if(!this.waitEntity) {
+    if (!this.waitEntity) {
       const waitView:WaitForStartView = new WaitForStartView();
 
       this.waitEntity = new Entity('wait')
         .add(new WaitForStart(waitView))
         .add(new Display(waitView))
-        .add(new Position(400, 300, 0));
+        .add(new Position(this.config.width / 2, this.config.height / 2, 0));
     }
     this.waitEntity.get(WaitForStart)!.startGame = false;
     this.engine.addEntity(this.waitEntity);
@@ -116,7 +118,7 @@ export class EntityCreator {
 
     spaceship
       .add(new Spaceship(fsm))
-      .add(new Position(300, 225, 0))
+      .add(new Position(this.config.width / 2, this.config.height / 2, 0))
       .add(new Audio());
 
     fsm.changeState('playing');

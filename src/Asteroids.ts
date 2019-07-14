@@ -25,10 +25,10 @@ import {
 } from './systems';
 
 export async function asteroids(container:HTMLElement) {
-  const engine = new Engine();
-  const creator = new EntityCreator(engine);
-  const keyPoll = new KeyPoll();
   const config = new GameConfig(container.clientWidth, container.clientHeight);
+  const engine = new Engine();
+  const creator = new EntityCreator(engine, config);
+  const keyPoll = new KeyPoll();
   const tickProvider = new RAFTickProvider();
   const audioContext = new AudioContext();
   const audioDB = new Map<string, AudioBuffer>();
@@ -41,8 +41,7 @@ export async function asteroids(container:HTMLElement) {
     audioDB.set(url, audioBuffer);
   };
 
-  const promises = soundNames.map(name => loadSound(name));
-  await Promise.all(promises);
+  await Promise.all(soundNames.map(loadSound));
   tickProvider.add(delta => engine.update(delta));
   tickProvider.start();
 
