@@ -3,11 +3,12 @@ import * as PIXI from 'pixi.js';
 
 export class WaitForStartView extends PIXI.Container {
   private readonly gameOver:PIXI.Text;
+
   private readonly clickToStart:PIXI.Text;
 
   public click:Signal0 = new Signal0();
 
-  constructor() {
+  public constructor() {
     super();
 
     const style = {

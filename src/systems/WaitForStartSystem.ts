@@ -6,10 +6,12 @@ export class WaitForStartSystem extends System {
   private creator:EntityCreator;
 
   private gameNodes:NodeList<GameNode> | null = null;
+
   private waitNodes:NodeList<WaitForStartNode> | null = null;
+
   private asteroids:NodeList<AsteroidCollisionNode> | null = null;
 
-  constructor(creator:EntityCreator) {
+  public constructor(creator:EntityCreator) {
     super();
     this.creator = creator;
   }

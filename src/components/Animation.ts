@@ -1,6 +1,9 @@
 import { Animatable } from '../graphics';
 
 export class Animation {
-  constructor(public animation:Animatable) {
+  public animation:Animatable;
+
+  public constructor(animation:Animatable) {
+    this.animation = animation;
   }
 }

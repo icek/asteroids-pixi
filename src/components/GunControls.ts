@@ -1,4 +1,7 @@
 export class GunControls {
-  constructor(public trigger:number = 0) {
+  public trigger:number;
+
+  public constructor(trigger:number = 0) {
+    this.trigger = trigger;
   }
 }

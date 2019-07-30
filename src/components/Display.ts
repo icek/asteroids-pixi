@@ -1,6 +1,9 @@
 import * as PIXI from 'pixi.js';
 
 export class Display {
-  constructor(public displayObject:PIXI.DisplayObject) {
+  public displayObject:PIXI.DisplayObject;
+
+  public constructor(displayObject:PIXI.DisplayObject) {
+    this.displayObject = displayObject;
   }
 }

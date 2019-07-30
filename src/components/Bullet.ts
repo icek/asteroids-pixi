@@ -1,4 +1,7 @@
 export class Bullet {
-  constructor(public lifeTime:number) {
+  public lifeTime:number;
+
+  public constructor(lifeTime:number) {
+    this.lifeTime = lifeTime;
   }
 }

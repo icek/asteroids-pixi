@@ -3,8 +3,11 @@ import { GameConfig } from '../GameConfig';
 import { MovementNode } from '../nodes';
 
 export class MovementSystem extends ListIteratingSystem<MovementNode> {
-  constructor(private readonly config:GameConfig) {
+  private readonly config:GameConfig;
+
+  public constructor(config:GameConfig) {
     super(MovementNode);
+    this.config = config;
   }
 
   public updateNode(node:MovementNode, time:number):void {

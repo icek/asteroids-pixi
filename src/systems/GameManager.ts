@@ -6,14 +6,18 @@ import { AsteroidCollisionNode, BulletCollisionNode, GameNode, SpaceshipNode } f
 
 export class GameManager extends System {
   private config:GameConfig;
+
   private creator:EntityCreator;
 
   private games:NodeList<GameNode> | null = null;
+
   private spaceships:NodeList<SpaceshipNode> | null = null;
+
   private asteroids:NodeList<AsteroidCollisionNode> | null = null;
+
   private bullets:NodeList<BulletCollisionNode> | null = null;
 
-  constructor(creator:EntityCreator, config:GameConfig) {
+  public constructor(creator:EntityCreator, config:GameConfig) {
     super();
     this.creator = creator;
     this.config = config;
@@ -33,9 +37,16 @@ export class GameManager extends System {
         if (gameNode.state.lives > 0) {
           const newSpaceshipPositionX = this.config.width / 2;
           const newSpaceshipPositionY = this.config.height / 2;
-          let clearToAddSpaceship:boolean = true;
+          let clearToAddSpaceship = true;
           for (let asteroid = this.asteroids!.head; asteroid; asteroid = asteroid.next) {
-            if (Position.distance(asteroid.position, { x: newSpaceshipPositionX, y: newSpaceshipPositionY }) <= asteroid.collision.radius + 50) {
+            const distance = Position.distance(
+              asteroid.position,
+              {
+                x: newSpaceshipPositionX,
+                y: newSpaceshipPositionY,
+              },
+            );
+            if (distance <= asteroid.collision.radius + 50) {
               clearToAddSpaceship = false;
               break;
             }
@@ -52,10 +63,10 @@ export class GameManager extends System {
       if (this.asteroids!.empty && this.bullets!.empty && this.spaceships!.head) {
         // next level
         const spaceship:SpaceshipNode | null = this.spaceships!.head;
-        gameNode.state.level++;
+        gameNode.state.level += 1;
         const minAsteroids = 2;
         const asteroidCount:number = minAsteroids + gameNode.state.level;
-        for (let i:number = 0; i < asteroidCount; ++i) {
+        for (let i = 0; i < asteroidCount; i += 1) {
           let positionX:number;
           let positionY:number;
           // check not on top of spaceship

@@ -1,6 +1,9 @@
-import { HudView } from '../graphics/HudView';
+import { HudView } from '../graphics';
 
 export class Hud {
-  constructor(public view:HudView) {
+  public view:HudView;
+
+  public constructor(view:HudView) {
+    this.view = view;
   }
 }

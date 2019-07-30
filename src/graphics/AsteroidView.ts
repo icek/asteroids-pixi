@@ -1,12 +1,12 @@
 import * as PIXI from 'pixi.js';
 
 export class AsteroidView extends PIXI.Graphics {
-  constructor(radius:number) {
+  public constructor(radius:number) {
     super();
 
     this.moveTo(radius, 0).beginFill(0xffffff);
-    let angle:number = 0;
-    while(angle < Math.PI * 2) {
+    let angle = 0;
+    while (angle < Math.PI * 2) {
       const length:number = (0.75 + Math.random() * 0.25) * radius;
       const posX:number = Math.cos(angle) * length;
       const posY:number = Math.sin(angle) * length;

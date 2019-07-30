@@ -1,7 +1,10 @@
 export class GameState {
   public lives:number = 0;
+
   public level:number = 0;
+
   public hits:number = 0;
+
   public playing:boolean = false;
 
   public setForStart():void {

@@ -5,7 +5,7 @@ import { DeathThroesNode } from '../nodes';
 export class DeathThroesSystem extends ListIteratingSystem<DeathThroesNode> {
   private creator:EntityCreator;
 
-  constructor(creator:EntityCreator) {
+  public constructor(creator:EntityCreator) {
     super(DeathThroesNode);
     this.creator = creator;
   }

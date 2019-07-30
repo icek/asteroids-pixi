@@ -1,13 +1,7 @@
 import { Engine, RAFTickProvider } from '@ash.ts/ash';
-
 import { EntityCreator } from './EntityCreator';
 import { GameConfig } from './GameConfig';
 import { KeyPoll } from './KeyPoll';
-
-import asteroidSound from './sounds/asteroid.mp3';
-import shipSound from './sounds/ship.mp3';
-import shootSound from './sounds/shoot.mp3';
-
 import {
   AnimationSystem,
   AudioSystem,
@@ -23,6 +17,7 @@ import {
   SystemPriorities,
   WaitForStartSystem,
 } from './systems';
+import { loadAudioDB } from './sounds';
 
 export async function asteroids(container:HTMLElement) {
   const config = new GameConfig(container.clientWidth, container.clientHeight);
@@ -30,18 +25,10 @@ export async function asteroids(container:HTMLElement) {
   const creator = new EntityCreator(engine, config);
   const keyPoll = new KeyPoll();
   const tickProvider = new RAFTickProvider();
+
   const audioContext = new AudioContext();
-  const audioDB = new Map<string, AudioBuffer>();
-  const soundNames = [asteroidSound, shipSound, shootSound];
+  const audioDB = await loadAudioDB(audioContext);
 
-  const loadSound = async (url:string):Promise<any> => {
-    const response = await fetch(url);
-    const arrayBuffer = await response.arrayBuffer();
-    const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
-    audioDB.set(url, audioBuffer);
-  };
-
-  await Promise.all(soundNames.map(loadSound));
   tickProvider.add(delta => engine.update(delta));
   tickProvider.start();
 

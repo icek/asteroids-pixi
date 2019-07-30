@@ -1,8 +1,9 @@
-export class Audio {
-  public toPlay:string[] = [];
+import { Sounds } from '../sounds';
 
-  public play(sound:string):void {
+export class Audio {
+  public toPlay:Sounds[] = [];
+
+  public play(sound:Sounds):void {
     this.toPlay.push(sound);
   }
 }
-

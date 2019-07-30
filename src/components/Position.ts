@@ -1,13 +1,22 @@
 export class Position {
-  constructor(public x:number, public y:number, public rotation:number = 0) {
+  public x:number;
+
+  public y:number;
+
+  public rotation:number;
+
+  public constructor(x:number, y:number, rotation:number = 0) {
+    this.x = x;
+    this.y = y;
+    this.rotation = rotation;
   }
 
-  static distance(pos1:XY, pos2:XY) {
+  public static distance(pos1:XY, pos2:XY):number {
     return Math.sqrt((pos1.x - pos2.x) * (pos1.x - pos2.x) + (pos1.y - pos2.y) * (pos1.y - pos2.y));
   }
 }
 
-type XY = {
+interface XY {
   x:number;
   y:number;
-};
+}

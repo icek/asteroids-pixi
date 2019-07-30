@@ -2,7 +2,7 @@ import { ListIteratingSystem } from '@ash.ts/ash';
 import { HudNode } from '../nodes';
 
 export class HudSystem extends ListIteratingSystem<HudNode> {
-  constructor() {
+  public constructor() {
     super(HudNode);
   }
 

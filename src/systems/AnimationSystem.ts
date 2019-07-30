@@ -2,7 +2,7 @@ import { ListIteratingSystem } from '@ash.ts/ash';
 import { AnimationNode } from '../nodes';
 
 export class AnimationSystem extends ListIteratingSystem<AnimationNode> {
-  constructor() {
+  public constructor() {
     super(AnimationNode);
   }
 

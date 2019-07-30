@@ -2,9 +2,10 @@ import * as PIXI from 'pixi.js';
 
 export class HudView extends PIXI.Container {
   private readonly score:PIXI.Text;
+
   private readonly lives:PIXI.Text;
 
-  constructor() {
+  public constructor() {
     super();
     this.setTransform(400, 50);
 

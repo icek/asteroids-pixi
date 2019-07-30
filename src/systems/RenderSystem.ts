@@ -8,12 +8,22 @@ interface RenderSystemOptions {
 
 export class RenderSystem extends System {
   private nodes:NodeList<RenderNode> | null = null;
+
   private readonly renderer:PIXI.Renderer;
+
   private readonly stage:PIXI.Container;
+
   private readonly view:HTMLCanvasElement;
 
-  constructor(private container:HTMLElement, private options:RenderSystemOptions = { emitStageEvents: true }) {
+  private container:HTMLElement;
+
+  private options:RenderSystemOptions;
+
+  public constructor(container:HTMLElement, options:RenderSystemOptions = { emitStageEvents: true }) {
     super();
+
+    this.container = container;
+    this.options = options;
     const app = new PIXI.Application({
       width: container.clientWidth,
       height: container.clientHeight,
