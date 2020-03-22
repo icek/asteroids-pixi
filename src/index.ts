@@ -1,10 +1,10 @@
 import { asteroids } from './Asteroids'
 
 window.addEventListener('load', async () => {
-  const canvas = document.getElementById('game')
-  if (!canvas) {
+  const game = document.getElementById('game')
+  if (!game) {
     return
   }
 
-  await asteroids(canvas)
+  await asteroids(game)
 })
