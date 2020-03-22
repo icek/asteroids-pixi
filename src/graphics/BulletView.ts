@@ -1,9 +1,11 @@
-import * as PIXI from 'pixi.js';
+import * as PIXI from 'pixi.js'
 
 export class BulletView extends PIXI.Graphics {
   public constructor() {
-    super();
+    super()
 
-    this.beginFill(0xffffff).drawCircle(0, 0, 2.5).endFill();
+    this.beginFill(0xffffff)
+      .drawCircle(0, 0, 2.5)
+      .endFill()
   }
 }

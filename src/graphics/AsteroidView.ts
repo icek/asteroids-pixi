@@ -1,18 +1,18 @@
-import * as PIXI from 'pixi.js';
+import * as PIXI from 'pixi.js'
 
 export class AsteroidView extends PIXI.Graphics {
-  public constructor(radius:number) {
-    super();
+  public constructor(radius: number) {
+    super()
 
-    this.moveTo(radius, 0).beginFill(0xffffff);
-    let angle = 0;
+    this.moveTo(radius, 0).beginFill(0xffffff)
+    let angle = 0
     while (angle < Math.PI * 2) {
-      const length:number = (0.75 + Math.random() * 0.25) * radius;
-      const posX:number = Math.cos(angle) * length;
-      const posY:number = Math.sin(angle) * length;
-      this.lineTo(posX, posY);
-      angle += Math.random() * 0.5;
+      const length: number = (0.75 + Math.random() * 0.25) * radius
+      const posX: number = Math.cos(angle) * length
+      const posY: number = Math.sin(angle) * length
+      this.lineTo(posX, posY)
+      angle += Math.random() * 0.5
     }
-    this.lineTo(radius, 0).endFill();
+    this.lineTo(radius, 0).endFill()
   }
 }

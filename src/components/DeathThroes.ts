@@ -1,7 +1,7 @@
 export class DeathThroes {
-  public countdown:number;
+  public countdown: number
 
-  public constructor(countdown:number) {
-    this.countdown = countdown;
+  public constructor(countdown: number) {
+    this.countdown = countdown
   }
 }

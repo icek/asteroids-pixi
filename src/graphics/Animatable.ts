@@ -1,3 +1,3 @@
 export interface Animatable {
-  animate(time:number):void;
+  animate(time: number): void
 }

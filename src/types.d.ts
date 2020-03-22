@@ -9,5 +9,5 @@
  *  Copyright (c) 2018 FatCode Grzegorz Michlicki
  *
  */
-declare module '*.mp3';
-declare module '*.ogg';
+declare module '*.mp3'
+declare module '*.ogg'

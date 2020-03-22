@@ -1,12 +1,12 @@
-import { ListIteratingSystem } from '@ash.ts/ash';
-import { AnimationNode } from '../nodes';
+import { ListIteratingSystem } from '@ash.ts/ash'
+import { AnimationNode } from '../nodes'
 
 export class AnimationSystem extends ListIteratingSystem<AnimationNode> {
   public constructor() {
-    super(AnimationNode);
+    super(AnimationNode)
   }
 
-  public updateNode(node:AnimationNode, time:number):void {
-    node.animation.animation.animate(time);
+  public updateNode(node: AnimationNode, time: number): void {
+    node.animation.animation.animate(time)
   }
 }

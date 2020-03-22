@@ -1,9 +1,9 @@
-import { Sounds } from '../sounds';
+import { Sounds } from '../sounds'
 
 export class Audio {
-  public toPlay:Sounds[] = [];
+  public toPlay: Sounds[] = []
 
-  public play(sound:Sounds):void {
-    this.toPlay.push(sound);
+  public play(sound: Sounds): void {
+    this.toPlay.push(sound)
   }
 }
