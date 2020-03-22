@@ -1,46 +1,45 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Asteroids</title>
-  <style>
-    html {
-      font-family: Helvetica, Arial, sans-serif;
-    }
-
-    body {
-      position: relative;
-    }
-
-    .ribbon {
-      position: absolute;
-      right: 0;
-      top: 0;
-    }
-
-    .demo-info a,
-    .demo-info a:hover,
-    .demo-info a:visited {
-      color: inherit;
-    }
-
-    #game {
-      fill: #fff;
-      overflow: hidden;
-      width: 800px;
-      height: 600px;
-      background-color: black;
-    }
-  </style>
-</head>
-<body>
-<a href="https://github.com/icek/asteroids-pixi" class="ribbon"><img width="149" height="149" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_red_aa0000.png?resize=149%2C149" class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a>
-<p class="demo-info">This is an example game developed using <a href="https://icek.github.io/ash">Ash</a> - an Entity Component System framework</p>
-<div id="game">
-  <!-- game -->
-</div>
-<script src="index.ts"></script>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="apple-touch-icon" href="icon.png" />
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+    <meta
+      name="apple-mobile-web-app-title"
+      content="<%= htmlWebpackPlugin.options.appName %>"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=0, minimal-ui, viewport-fit=cover"
+    />
+    <title>Asteroids</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        overflow-y: hidden;
+        background: lightgray;
+      }
+      .fullscreen-centered {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="game" class="fullscreen-centered">
+      <canvas id="canvas"></canvas>
+    </div>
+    <script src="index.ts"></script>
+  </body>
 </html>
