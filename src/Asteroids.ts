@@ -1,4 +1,4 @@
-import { Engine, RAFTickProvider } from '@ash.ts/ash';
+import { Engine, FrameTickProvider } from '@ash.ts/ash';
 import { EntityCreator } from './EntityCreator';
 import { GameConfig } from './GameConfig';
 import { KeyPoll } from './KeyPoll';
@@ -24,7 +24,7 @@ export async function asteroids(container:HTMLElement) {
   const engine = new Engine();
   const creator = new EntityCreator(engine, config);
   const keyPoll = new KeyPoll();
-  const tickProvider = new RAFTickProvider();
+  const tickProvider = new FrameTickProvider();
 
   const audioContext = new AudioContext();
   const audioDB = await loadAudioDB(audioContext);
