@@ -12,7 +12,7 @@ import {
 export class GameManager extends System {
   private config: GameConfig
 
-  private creator: EntityCreator
+  private entityCreator: EntityCreator
 
   private games: NodeList<GameNode> | null = null
 
@@ -22,9 +22,9 @@ export class GameManager extends System {
 
   private bullets: NodeList<BulletCollisionNode> | null = null
 
-  public constructor(creator: EntityCreator, config: GameConfig) {
+  public constructor(entityCreator: EntityCreator, config: GameConfig) {
     super()
-    this.creator = creator
+    this.entityCreator = entityCreator
     this.config = config
   }
 
@@ -40,6 +40,7 @@ export class GameManager extends System {
     if (gameNode && gameNode.state.playing) {
       if (this.spaceships!.empty) {
         if (gameNode.state.lives > 0) {
+          console.log('Add spaceship')
           const newSpaceshipPositionX = this.config.width / 2
           const newSpaceshipPositionY = this.config.height / 2
           let clearToAddSpaceship = true
@@ -58,17 +59,17 @@ export class GameManager extends System {
             }
           }
           if (clearToAddSpaceship) {
-            this.creator.createSpaceship()
+            this.entityCreator.createSpaceship()
           }
         } else {
           gameNode.state.playing = false
-          this.creator.createWaitForClick()
+          this.entityCreator.createWaitForClick()
         }
       }
 
       if (
         this.asteroids!.empty &&
-        this.bullets!.empty &&
+        // this.bullets!.empty &&
         this.spaceships!.head
       ) {
         // next level
@@ -89,7 +90,7 @@ export class GameManager extends System {
               spaceship.position,
             ) <= 80
           )
-          this.creator.createAsteroid(30, positionX, positionY)
+          this.entityCreator.createAsteroid(30, positionX, positionY)
         }
       }
     }

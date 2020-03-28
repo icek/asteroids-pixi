@@ -22,7 +22,7 @@ import { loadAudioDB } from './sounds'
 export async function asteroids(container: HTMLElement) {
   const config = new GameConfig(container.clientWidth, container.clientHeight)
   const engine = new Engine()
-  const creator = new EntityCreator(engine, config)
+  const entityCreator = new EntityCreator(engine, config)
   const keyPoll = new KeyPoll()
   const tickProvider = new FrameTickProvider()
 
@@ -32,18 +32,27 @@ export async function asteroids(container: HTMLElement) {
   tickProvider.add(delta => engine.update(delta))
   tickProvider.start()
 
-  engine.addSystem(new WaitForStartSystem(creator), SystemPriorities.preUpdate)
-  engine.addSystem(new GameManager(creator, config), SystemPriorities.preUpdate)
+  engine.addSystem(
+    new WaitForStartSystem(entityCreator),
+    SystemPriorities.preUpdate,
+  )
+  engine.addSystem(
+    new GameManager(entityCreator, config),
+    SystemPriorities.preUpdate,
+  )
   engine.addSystem(new MotionControlSystem(keyPoll), SystemPriorities.update)
   engine.addSystem(
-    new GunControlSystem(keyPoll, creator),
+    new GunControlSystem(keyPoll, entityCreator),
     SystemPriorities.update,
   )
-  engine.addSystem(new BulletAgeSystem(creator), SystemPriorities.update)
-  engine.addSystem(new DeathThroesSystem(creator), SystemPriorities.update)
+  // engine.addSystem(new BulletAgeSystem(entityCreator), SystemPriorities.update)
+  engine.addSystem(
+    new DeathThroesSystem(entityCreator),
+    SystemPriorities.update,
+  )
   engine.addSystem(new MovementSystem(config), SystemPriorities.move)
   engine.addSystem(
-    new CollisionSystem(creator),
+    new CollisionSystem(entityCreator),
     SystemPriorities.resolveCollisions,
   )
   engine.addSystem(new AnimationSystem(), SystemPriorities.animate)
@@ -54,6 +63,6 @@ export async function asteroids(container: HTMLElement) {
     SystemPriorities.audio,
   )
 
-  creator.createWaitForClick()
-  creator.createGame()
+  entityCreator.createWaitForClick()
+  entityCreator.createGame()
 }

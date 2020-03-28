@@ -1,6 +1,7 @@
 import { Engine, NodeList, System } from '@ash.ts/ash'
 import * as PIXI from 'pixi.js'
 import { RenderNode } from '../nodes'
+import { getSizeProps } from '../setup/getSizeProps'
 
 interface RenderSystemOptions {
   emitStageEvents: boolean
@@ -36,6 +37,23 @@ export class RenderSystem extends System {
     this.renderer = app.renderer
     this.stage = app.stage
     this.view = app.view
+
+    // const canvas = app.view
+    // const { renderer, stage } = app
+    // const onResize = () => {
+    //   const sizeProps = getSizeProps({
+    //     width: window.innerWidth,
+    //     height: window.innerHeight,
+    //   })
+
+    //   Object.assign(stage, sizeProps.stage)
+
+    //   renderer.resize(sizeProps.renderer.width, sizeProps.renderer.height)
+    //   canvas.style.width = `${sizeProps.canvas.width}px`
+    //   canvas.style.height = `${sizeProps.canvas.height}px`
+    // }
+    // onResize()
+    // window.addEventListener('resize', onResize)
   }
 
   public addToEngine(engine: Engine): void {

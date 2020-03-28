@@ -3,18 +3,18 @@ import { EntityCreator } from '../EntityCreator'
 import { BulletAgeNode } from '../nodes'
 
 export class BulletAgeSystem extends ListIteratingSystem<BulletAgeNode> {
-  private creator: EntityCreator
+  private entityCreator: EntityCreator
 
-  public constructor(creator: EntityCreator) {
+  public constructor(entityCreator: EntityCreator) {
     super(BulletAgeNode)
-    this.creator = creator
+    this.entityCreator = entityCreator
   }
 
   public updateNode(node: BulletAgeNode, time: number): void {
     const { bullet } = node
     bullet.lifeTime -= time
     if (bullet.lifeTime <= 0) {
-      this.creator.destroyEntity(node.entity)
+      this.entityCreator.destroyEntity(node.entity)
     }
   }
 }

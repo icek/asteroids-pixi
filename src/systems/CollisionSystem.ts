@@ -10,7 +10,7 @@ import {
 import { Sounds } from '../sounds'
 
 export class CollisionSystem extends System {
-  private creator: EntityCreator
+  private entityCreator: EntityCreator
 
   private games: NodeList<GameNode> | null = null
 
@@ -20,9 +20,9 @@ export class CollisionSystem extends System {
 
   private bullets: NodeList<BulletCollisionNode> | null = null
 
-  public constructor(creator: EntityCreator) {
+  public constructor(entityCreator: EntityCreator) {
     super()
-    this.creator = creator
+    this.entityCreator = entityCreator
   }
 
   public addToEngine(engine: Engine): void {
@@ -41,15 +41,15 @@ export class CollisionSystem extends System {
       ) {
         const distance = Position.distance(asteroid.position, bullet.position)
         if (distance <= asteroid.collision.radius) {
-          this.creator.destroyEntity(bullet.entity)
+          this.entityCreator.destroyEntity(bullet.entity)
           if (asteroid.collision.radius > 10) {
             const radius = asteroid.collision.radius - 10
             let x = asteroid.position.x + Math.random() * 10 - 5
             let y = asteroid.position.y + Math.random() * 10 - 5
-            this.creator.createAsteroid(radius, x, y)
+            this.entityCreator.createAsteroid(radius, x, y)
             x = asteroid.position.x + Math.random() * 10 - 5
             y = asteroid.position.y + Math.random() * 10 - 5
-            this.creator.createAsteroid(radius, x, y)
+            this.entityCreator.createAsteroid(radius, x, y)
           }
           asteroid.asteroid.fsm.changeState('destroyed')
           asteroid.audio.play(Sounds.asteroid)

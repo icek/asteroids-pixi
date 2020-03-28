@@ -3,7 +3,7 @@ import { EntityCreator } from '../EntityCreator'
 import { AsteroidCollisionNode, GameNode, WaitForStartNode } from '../nodes'
 
 export class WaitForStartSystem extends System {
-  private creator: EntityCreator
+  private entityCreator: EntityCreator
 
   private gameNodes: NodeList<GameNode> | null = null
 
@@ -11,9 +11,9 @@ export class WaitForStartSystem extends System {
 
   private asteroids: NodeList<AsteroidCollisionNode> | null = null
 
-  public constructor(creator: EntityCreator) {
+  public constructor(entityCreator: EntityCreator) {
     super()
-    this.creator = creator
+    this.entityCreator = entityCreator
   }
 
   public addToEngine(engine: Engine): void {
@@ -36,14 +36,14 @@ export class WaitForStartSystem extends System {
         asteroid = asteroid.next
       ) {
         if (asteroid.entity) {
-          this.creator.destroyEntity(asteroid.entity)
+          this.entityCreator.destroyEntity(asteroid.entity)
         }
       }
 
       game.state.setForStart()
       waitForStartNode.wait.startGame = false
       if (waitForStartNode.entity) {
-        this.creator.destroyEntity(waitForStartNode.entity)
+        this.entityCreator.destroyEntity(waitForStartNode.entity)
       }
     }
   }

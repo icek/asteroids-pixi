@@ -7,12 +7,12 @@ import { Sounds } from '../sounds'
 export class GunControlSystem extends ListIteratingSystem<GunControlNode> {
   private keyPoll: KeyPoll
 
-  private creator: EntityCreator
+  private entityCreator: EntityCreator
 
-  public constructor(keyPoll: KeyPoll, creator: EntityCreator) {
+  public constructor(keyPoll: KeyPoll, entityCreator: EntityCreator) {
     super(GunControlNode)
     this.keyPoll = keyPoll
-    this.creator = creator
+    this.entityCreator = entityCreator
   }
 
   public updateNode(node: GunControlNode, time: number): void {
@@ -23,7 +23,7 @@ export class GunControlSystem extends ListIteratingSystem<GunControlNode> {
     gun.shooting = this.keyPoll.isDown(control.trigger)
     gun.timeSinceLastShot += time
     if (gun.shooting && gun.timeSinceLastShot >= gun.minimumShotInterval) {
-      this.creator.createUserBullet(gun, position)
+      this.entityCreator.createUserBullet(gun, position)
       node.audio.play(Sounds.shoot)
       gun.timeSinceLastShot = 0
     }

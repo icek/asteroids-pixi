@@ -3,17 +3,17 @@ import { EntityCreator } from '../EntityCreator'
 import { DeathThroesNode } from '../nodes'
 
 export class DeathThroesSystem extends ListIteratingSystem<DeathThroesNode> {
-  private creator: EntityCreator
+  private entityCreator: EntityCreator
 
-  public constructor(creator: EntityCreator) {
+  public constructor(entityCreator: EntityCreator) {
     super(DeathThroesNode)
-    this.creator = creator
+    this.entityCreator = entityCreator
   }
 
   public updateNode(node: DeathThroesNode, time: number): void {
     node.death.countdown -= time
     if (node.death.countdown <= 0) {
-      this.creator.destroyEntity(node.entity)
+      this.entityCreator.destroyEntity(node.entity)
     }
   }
 }
