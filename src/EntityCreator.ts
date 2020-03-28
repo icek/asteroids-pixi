@@ -1,6 +1,6 @@
 import { Engine, Entity, EntityStateMachine } from '@ash.ts/ash'
 import {
-  AnimationComponent,
+  UpdatableComponent,
   AsteroidComponent,
   AudioComponent,
   BulletComponent,
@@ -38,6 +38,12 @@ export class EntityCreator {
     this.engine.removeEntity(entity)
   }
 
+  public createBasicGame() {
+    const gameEntity: Entity = new Entity('game').add(new GameStateComponent())
+    this.engine.addEntity(gameEntity)
+    return gameEntity
+  }
+
   public createGame(): Entity {
     const hud: HudView = new HudView()
 
@@ -71,15 +77,15 @@ export class EntityCreator {
   }
 
   public createAsteroid(radius: number, x: number, y: number): Entity {
-    const asteroid: Entity = new Entity()
+    const asteroid = new Entity()
 
-    const fsm: EntityStateMachine = new EntityStateMachine(asteroid)
+    const entityStateMachine = new EntityStateMachine(asteroid)
 
     const velocityX = (Math.random() - 0.5) * 4 * (50 - radius)
     const velocityY = (Math.random() - 0.5) * 4 * (50 - radius)
-    const angularVelocity: number = Math.random() * 2 - 1
+    const angularVelocity = Math.random() * 2 - 1
 
-    fsm
+    entityStateMachine
       .createState('alive')
       .add(MotionComponent)
       .withInstance(new MotionComponent(velocityX, velocityY, angularVelocity))
@@ -89,30 +95,30 @@ export class EntityCreator {
       .withInstance(new DisplayComponent(new AsteroidView(radius)))
 
     const deathView: AsteroidDeathView = new AsteroidDeathView(radius)
-    fsm
+    entityStateMachine
       .createState('destroyed')
       .add(DeathThroesComponent)
       .withInstance(new DeathThroesComponent(3))
       .add(DisplayComponent)
       .withInstance(new DisplayComponent(deathView))
-      .add(AnimationComponent)
-      .withInstance(new AnimationComponent(deathView))
+      .add(UpdatableComponent)
+      .withInstance(new UpdatableComponent(deathView))
 
     asteroid
-      .add(new AsteroidComponent(fsm))
+      .add(new AsteroidComponent(entityStateMachine))
       .add(new TransformComponent(x, y, 0))
       .add(new AudioComponent())
 
-    fsm.changeState('alive')
+    entityStateMachine.changeState('alive')
     this.engine.addEntity(asteroid)
     return asteroid
   }
 
-  public createSpaceship(): Entity {
-    const spaceship: Entity = new Entity()
-    const fsm: EntityStateMachine = new EntityStateMachine(spaceship)
+  public createSpaceship(x: number, y: number): Entity {
+    const spaceship = new Entity()
+    const entityStateMachine = new EntityStateMachine(spaceship)
 
-    fsm
+    entityStateMachine
       .createState('playing')
       .add(MotionComponent)
       .withInstance(new MotionComponent(0, 0, 0, 15))
@@ -136,27 +142,21 @@ export class EntityCreator {
       .withInstance(new DisplayComponent(new SpaceshipView()))
 
     const deathView: SpaceshipDeathView = new SpaceshipDeathView()
-    fsm
+    entityStateMachine
       .createState('destroyed')
       .add(DeathThroesComponent)
       .withInstance(new DeathThroesComponent(5))
       .add(DisplayComponent)
       .withInstance(new DisplayComponent(deathView))
-      .add(AnimationComponent)
-      .withInstance(new AnimationComponent(deathView))
+      .add(UpdatableComponent)
+      .withInstance(new UpdatableComponent(deathView))
 
     spaceship
-      .add(new SpaceshipComponent(fsm))
-      .add(
-        new TransformComponent(
-          this.viewport.width / 2,
-          this.viewport.height / 2,
-          0,
-        ),
-      )
+      .add(new SpaceshipComponent(entityStateMachine))
+      .add(new TransformComponent(x, y, 0))
       .add(new AudioComponent())
 
-    fsm.changeState('playing')
+    entityStateMachine.changeState('playing')
     this.engine.addEntity(spaceship)
     return spaceship
   }
@@ -165,9 +165,9 @@ export class EntityCreator {
     gun: GunComponent,
     parentTransform: TransformComponent,
   ): Entity {
-    const cos: number = Math.cos(parentTransform.rotation)
-    const sin: number = Math.sin(parentTransform.rotation)
-    const bullet: Entity = new Entity()
+    const cos = Math.cos(parentTransform.rotation)
+    const sin = Math.sin(parentTransform.rotation)
+    const bullet = new Entity()
       .add(new BulletComponent(gun.bulletLifetime))
       .add(
         new TransformComponent(

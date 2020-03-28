@@ -1,10 +1,10 @@
-import { asteroids } from './SimpleAsteroids'
+import { initialiseGame } from './JustShip'
 
 window.addEventListener('load', async () => {
-  const game = document.getElementById('game')
-  if (!game) {
+  const containerElement = document.getElementById('game')
+  if (!containerElement) {
     return
   }
 
-  await asteroids(game)
+  await initialiseGame(containerElement)
 })

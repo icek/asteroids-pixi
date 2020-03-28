@@ -32,27 +32,28 @@ export class CollisionSystem extends System {
   public update(): void {
     for (let bullet = this.bullets!.head; bullet; bullet = bullet.next) {
       for (
-        let asteroid = this.asteroids!.head;
-        asteroid;
-        asteroid = asteroid.next
+        let asteroidNode = this.asteroids!.head;
+        asteroidNode;
+        asteroidNode = asteroidNode.next
       ) {
         const distance = TransformComponent.distance(
-          asteroid.transform,
+          asteroidNode.transform,
           bullet.transform,
         )
-        if (distance <= asteroid.collision.radius) {
+        if (distance <= asteroidNode.collision.radius) {
           this.entityCreator.destroyEntity(bullet.entity)
-          if (asteroid.collision.radius > 10) {
-            const radius = asteroid.collision.radius - 10
-            let x = asteroid.transform.x + Math.random() * 10 - 5
-            let y = asteroid.transform.y + Math.random() * 10 - 5
+          if (asteroidNode.collision.radius > 10) {
+            // Make smaller 2 asteroids, not sure who is destroing the old one :shrug:
+            const radius = asteroidNode.collision.radius - 10
+            let x = asteroidNode.transform.x + Math.random() * 10 - 5
+            let y = asteroidNode.transform.y + Math.random() * 10 - 5
             this.entityCreator.createAsteroid(radius, x, y)
-            x = asteroid.transform.x + Math.random() * 10 - 5
-            y = asteroid.transform.y + Math.random() * 10 - 5
+            x = asteroidNode.transform.x + Math.random() * 10 - 5
+            y = asteroidNode.transform.y + Math.random() * 10 - 5
             this.entityCreator.createAsteroid(radius, x, y)
           }
-          asteroid.asteroid.fsm.changeState('destroyed')
-          asteroid.audio.play(Sounds.asteroid)
+          asteroidNode.asteroid.entityStateMachine.changeState('destroyed')
+          asteroidNode.audio.play(Sounds.asteroid)
           if (this.games!.head) {
             this.games!.head.state.hits += 1
           }
@@ -79,7 +80,7 @@ export class CollisionSystem extends System {
           distance <=
           asteroid.collision.radius + spaceship.collision.radius
         ) {
-          spaceship.spaceship.finiteStateMachine.changeState('destroyed')
+          spaceship.spaceship.entityStateMachine.changeState('destroyed')
           spaceship.audio.play(Sounds.ship)
           if (this.games!.head) {
             this.games!.head.state.lives -= 1

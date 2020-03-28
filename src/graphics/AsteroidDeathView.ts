@@ -1,8 +1,8 @@
 import * as PIXI from 'pixi.js'
-import { Animatable } from './Animatable'
+import { Updatable } from './Updatable'
 import { Dot } from './Dot'
 
-export class AsteroidDeathView extends PIXI.Container implements Animatable {
+export class AsteroidDeathView extends PIXI.Container implements Updatable {
   private static numDots: number = 8
 
   private dots: Dot[] = []
@@ -17,7 +17,7 @@ export class AsteroidDeathView extends PIXI.Container implements Animatable {
     }
   }
 
-  public animate(time: number): void {
+  public update(time: number): void {
     for (const dot of this.dots) {
       dot.setTransform(
         dot.x + dot.velocityX * time,

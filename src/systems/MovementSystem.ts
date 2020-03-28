@@ -15,6 +15,7 @@ export class MovementSystem extends ListIteratingSystem<MovementNode> {
     const { width, height } = this.viewport
     transform.x += motion.velocityX * time
     transform.y += motion.velocityY * time
+    // Check if its out of borders and place it accordingly if it is
     if (transform.x < 0) {
       transform.x += width
     }

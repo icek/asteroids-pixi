@@ -3,12 +3,12 @@ import { EntityCreator } from './EntityCreator'
 import { Viewport } from './Viewport'
 import { KeyPoll } from './KeyPoll'
 import {
-  AnimationSystem,
+  UpdateSystem,
   AudioSystem,
   BulletAgeSystem,
   CollisionSystem,
   DeathThroesSystem,
-  GameManager,
+  SpawnSystem,
   GunControlSystem,
   HudSystem,
   MotionControlSystem,
@@ -19,7 +19,7 @@ import {
 } from './systems'
 import { loadAudioDB } from './sounds'
 
-export async function asteroids(container: HTMLElement) {
+export async function initialiseGame(container: HTMLElement) {
   const viewport = new Viewport(container.clientWidth, container.clientHeight)
   const engine = new Engine()
   const entityCreator = new EntityCreator(engine, viewport)
@@ -37,7 +37,7 @@ export async function asteroids(container: HTMLElement) {
     SystemPriorities.preUpdate,
   )
   engine.addSystem(
-    new GameManager(entityCreator, viewport),
+    new SpawnSystem(entityCreator, viewport),
     SystemPriorities.preUpdate,
   )
   engine.addSystem(new MotionControlSystem(keyPoll), SystemPriorities.update)
@@ -55,8 +55,8 @@ export async function asteroids(container: HTMLElement) {
     new CollisionSystem(entityCreator),
     SystemPriorities.resolveCollisions,
   )
-  engine.addSystem(new AnimationSystem(), SystemPriorities.animate)
-  engine.addSystem(new HudSystem(), SystemPriorities.animate)
+  engine.addSystem(new UpdateSystem(), SystemPriorities.updatable)
+  engine.addSystem(new HudSystem(), SystemPriorities.updatable)
   engine.addSystem(new RenderSystem(container), SystemPriorities.render)
   engine.addSystem(
     new AudioSystem(audioContext, audioDB),

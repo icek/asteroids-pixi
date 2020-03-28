@@ -9,7 +9,7 @@ import {
   SpaceshipNode,
 } from '../nodes'
 
-export class GameManager extends System {
+export class SpawnSystem extends System {
   private games: NodeList<GameNode> | null = null
 
   private spaceships: NodeList<SpaceshipNode> | null = null
@@ -57,7 +57,10 @@ export class GameManager extends System {
             }
           }
           if (clearToAddSpaceship) {
-            this.entityCreator.createSpaceship()
+            this.entityCreator.createSpaceship(
+              newSpaceshipPositionX,
+              newSpaceshipPositionY,
+            )
           }
         } else {
           gameNode.state.playing = false
@@ -72,6 +75,7 @@ export class GameManager extends System {
         this.spaceships!.head
       ) {
         // next level
+        console.log('next level')
         const spaceship: SpaceshipNode | null = this.spaceships!.head
         gameNode.state.level += 1
         const minAsteroids = 2

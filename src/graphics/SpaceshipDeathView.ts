@@ -1,7 +1,7 @@
 import * as PIXI from 'pixi.js'
-import { Animatable } from './Animatable'
+import { Updatable } from './Updatable'
 
-export class SpaceshipDeathView extends PIXI.Container implements Animatable {
+export class SpaceshipDeathView extends PIXI.Container implements Updatable {
   private readonly shape1: PIXI.Graphics
 
   private readonly shape2: PIXI.Graphics
@@ -49,7 +49,7 @@ export class SpaceshipDeathView extends PIXI.Container implements Animatable {
     this.rot2 = Math.random() * 3 - 1.5
   }
 
-  public animate(time: number): void {
+  public update(time: number): void {
     const { shape1, shape2 } = this
     shape1.setTransform(
       shape1.x + this.vel1x * time,

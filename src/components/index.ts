@@ -1,4 +1,4 @@
-export * from './AnimationComponent'
+export * from './UpdatableComponent'
 export * from './AsteroidComponent'
 export * from './AudioComponent'
 export * from './BulletComponent'

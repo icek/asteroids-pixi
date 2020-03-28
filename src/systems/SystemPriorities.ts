@@ -3,7 +3,7 @@ export enum SystemPriorities {
   update = 2,
   move = 3,
   resolveCollisions = 4,
-  animate = 5,
+  updatable = 5,
   render = 6,
   audio = 7,
 }
