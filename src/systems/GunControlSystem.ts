@@ -16,14 +16,14 @@ export class GunControlSystem extends ListIteratingSystem<GunControlNode> {
   }
 
   public updateNode(node: GunControlNode, time: number): void {
-    const { control } = node
-    const { position } = node
+    const { controls: control } = node
+    const { transform } = node
     const { gun } = node
 
     gun.shooting = this.keyPoll.isDown(control.trigger)
     gun.timeSinceLastShot += time
     if (gun.shooting && gun.timeSinceLastShot >= gun.minimumShotInterval) {
-      this.entityCreator.createUserBullet(gun, position)
+      this.entityCreator.createUserBullet(gun, transform)
       node.audio.play(Sounds.shoot)
       gun.timeSinceLastShot = 0
     }

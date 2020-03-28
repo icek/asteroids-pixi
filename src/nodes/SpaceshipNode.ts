@@ -6,5 +6,5 @@ export class SpaceshipNode extends Node {
   public spaceship!: SpaceshipComponent
 
   @keep(TransformComponent)
-  public position!: TransformComponent
+  public transform!: TransformComponent
 }

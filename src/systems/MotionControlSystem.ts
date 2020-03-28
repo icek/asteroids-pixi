@@ -14,22 +14,22 @@ export class MotionControlSystem extends ListIteratingSystem<
 
   public updateNode(node: MotionControlNode, time: number): void {
     const { control } = node
-    const { position } = node
+    const { transform } = node
     const { motion } = node
 
     if (this.keyPoll.isDown(control.left)) {
-      position.rotation -= control.rotationRate * time
+      transform.rotation -= control.rotationRate * time
     }
 
     if (this.keyPoll.isDown(control.right)) {
-      position.rotation += control.rotationRate * time
+      transform.rotation += control.rotationRate * time
     }
 
     if (this.keyPoll.isDown(control.accelerate)) {
       motion.velocityX +=
-        Math.cos(position.rotation) * control.accelerationRate * time
+        Math.cos(transform.rotation) * control.accelerationRate * time
       motion.velocityY +=
-        Math.sin(position.rotation) * control.accelerationRate * time
+        Math.sin(transform.rotation) * control.accelerationRate * time
     }
   }
 }

@@ -25,9 +25,6 @@ export async function asteroids(container: HTMLElement) {
   const keyPoll = new KeyPoll()
   const tickProvider = new FrameTickProvider()
 
-  const audioContext = new AudioContext()
-  const audioDB = await loadAudioDB(audioContext)
-
   tickProvider.add(delta => engine.update(delta))
   tickProvider.start()
 

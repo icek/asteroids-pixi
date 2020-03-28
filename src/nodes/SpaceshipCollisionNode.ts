@@ -11,7 +11,7 @@ export class SpaceshipCollisionNode extends Node {
   public spaceship!: SpaceshipComponent
 
   @keep(TransformComponent)
-  public position!: TransformComponent
+  public transform!: TransformComponent
 
   @keep(CollisionComponent)
   public collision!: CollisionComponent

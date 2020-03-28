@@ -163,20 +163,20 @@ export class EntityCreator {
 
   public createUserBullet(
     gun: GunComponent,
-    parentPosition: TransformComponent,
+    parentTransform: TransformComponent,
   ): Entity {
-    const cos: number = Math.cos(parentPosition.rotation)
-    const sin: number = Math.sin(parentPosition.rotation)
+    const cos: number = Math.cos(parentTransform.rotation)
+    const sin: number = Math.sin(parentTransform.rotation)
     const bullet: Entity = new Entity()
       .add(new BulletComponent(gun.bulletLifetime))
       .add(
         new TransformComponent(
           cos * gun.offsetFromParentX -
             sin * gun.offsetFromParentY +
-            parentPosition.x,
+            parentTransform.x,
           sin * gun.offsetFromParentX +
             cos * gun.offsetFromParentY +
-            parentPosition.y,
+            parentTransform.y,
           0,
         ),
       )

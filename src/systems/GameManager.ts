@@ -10,10 +10,6 @@ import {
 } from '../nodes'
 
 export class GameManager extends System {
-  private viewport: Viewport
-
-  private entityCreator: EntityCreator
-
   private games: NodeList<GameNode> | null = null
 
   private spaceships: NodeList<SpaceshipNode> | null = null
@@ -22,10 +18,11 @@ export class GameManager extends System {
 
   private bullets: NodeList<BulletCollisionNode> | null = null
 
-  public constructor(entityCreator: EntityCreator, viewport: Viewport) {
+  public constructor(
+    public entityCreator: EntityCreator,
+    public viewport: Viewport,
+  ) {
     super()
-    this.entityCreator = entityCreator
-    this.viewport = viewport
   }
 
   public addToEngine(engine: Engine): void {
@@ -50,7 +47,7 @@ export class GameManager extends System {
             asteroid;
             asteroid = asteroid.next
           ) {
-            const distance = TransformComponent.distance(asteroid.position, {
+            const distance = TransformComponent.distance(asteroid.transform, {
               x: newSpaceshipPositionX,
               y: newSpaceshipPositionY,
             })
@@ -89,7 +86,7 @@ export class GameManager extends System {
           } while (
             TransformComponent.distance(
               { x: positionX, y: positionY },
-              spaceship.position,
+              spaceship.transform,
             ) <= 80
           )
           this.entityCreator.createAsteroid(30, positionX, positionY)

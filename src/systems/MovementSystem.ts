@@ -11,29 +11,29 @@ export class MovementSystem extends ListIteratingSystem<MovementNode> {
   }
 
   public updateNode(node: MovementNode, time: number): void {
-    const { position, motion } = node
+    const { transform, motion } = node
     const { width, height } = this.viewport
-    position.x += motion.velocityX * time
-    position.y += motion.velocityY * time
-    if (position.x < 0) {
-      position.x += width
+    transform.x += motion.velocityX * time
+    transform.y += motion.velocityY * time
+    if (transform.x < 0) {
+      transform.x += width
     }
-    if (position.x > width) {
-      position.x -= width
+    if (transform.x > width) {
+      transform.x -= width
     }
-    if (position.y < 0) {
-      position.y += height
+    if (transform.y < 0) {
+      transform.y += height
     }
-    if (position.y > height) {
-      position.y -= height
+    if (transform.y > height) {
+      transform.y -= height
     }
-    position.rotation += motion.angularVelocity * time
+    transform.rotation += motion.angularVelocity * time
     if (motion.damping > 0) {
       const xDamp: number = Math.abs(
-        Math.cos(position.rotation) * motion.damping * time,
+        Math.cos(transform.rotation) * motion.damping * time,
       )
       const yDamp: number = Math.abs(
-        Math.sin(position.rotation) * motion.damping * time,
+        Math.sin(transform.rotation) * motion.damping * time,
       )
       if (motion.velocityX > xDamp) {
         motion.velocityX -= xDamp

@@ -10,7 +10,7 @@ export class BulletCollisionNode extends Node {
   public bullet!: BulletComponent
 
   @keep(TransformComponent)
-  public position!: TransformComponent
+  public transform!: TransformComponent
 
   @keep(CollisionComponent)
   public collision!: CollisionComponent

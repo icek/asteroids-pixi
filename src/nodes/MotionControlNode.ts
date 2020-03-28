@@ -10,7 +10,7 @@ export class MotionControlNode extends Node {
   public control!: MotionControlsComponent
 
   @keep(TransformComponent)
-  public position!: TransformComponent
+  public transform!: TransformComponent
 
   @keep(MotionComponent)
   public motion!: MotionComponent

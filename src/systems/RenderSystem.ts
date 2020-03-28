@@ -86,13 +86,13 @@ export class RenderSystem extends System {
 
   public update(time: number): void {
     for (let node = this.nodes!.head; node; node = node.next) {
-      const { display, position } = node
+      const { display, transform } = node
       display.object.setTransform(
-        position.x,
-        position.y,
+        transform.x,
+        transform.y,
         1,
         1,
-        position.rotation,
+        transform.rotation,
       )
     }
     this.renderer.render(this.stage)

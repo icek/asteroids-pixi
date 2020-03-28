@@ -11,7 +11,7 @@ export class AsteroidCollisionNode extends Node {
   public asteroid!: AsteroidComponent
 
   @keep(TransformComponent)
-  public position!: TransformComponent
+  public transform!: TransformComponent
 
   @keep(CollisionComponent)
   public collision!: CollisionComponent

@@ -10,8 +10,6 @@ import {
 import { Sounds } from '../sounds'
 
 export class CollisionSystem extends System {
-  private entityCreator: EntityCreator
-
   private games: NodeList<GameNode> | null = null
 
   private spaceships: NodeList<SpaceshipCollisionNode> | null = null
@@ -20,9 +18,8 @@ export class CollisionSystem extends System {
 
   private bullets: NodeList<BulletCollisionNode> | null = null
 
-  public constructor(entityCreator: EntityCreator) {
+  public constructor(public entityCreator: EntityCreator) {
     super()
-    this.entityCreator = entityCreator
   }
 
   public addToEngine(engine: Engine): void {
@@ -32,7 +29,7 @@ export class CollisionSystem extends System {
     this.bullets = engine.getNodeList(BulletCollisionNode)
   }
 
-  public update(time: number): void {
+  public update(): void {
     for (let bullet = this.bullets!.head; bullet; bullet = bullet.next) {
       for (
         let asteroid = this.asteroids!.head;
@@ -40,18 +37,18 @@ export class CollisionSystem extends System {
         asteroid = asteroid.next
       ) {
         const distance = TransformComponent.distance(
-          asteroid.position,
-          bullet.position,
+          asteroid.transform,
+          bullet.transform,
         )
         if (distance <= asteroid.collision.radius) {
           this.entityCreator.destroyEntity(bullet.entity)
           if (asteroid.collision.radius > 10) {
             const radius = asteroid.collision.radius - 10
-            let x = asteroid.position.x + Math.random() * 10 - 5
-            let y = asteroid.position.y + Math.random() * 10 - 5
+            let x = asteroid.transform.x + Math.random() * 10 - 5
+            let y = asteroid.transform.y + Math.random() * 10 - 5
             this.entityCreator.createAsteroid(radius, x, y)
-            x = asteroid.position.x + Math.random() * 10 - 5
-            y = asteroid.position.y + Math.random() * 10 - 5
+            x = asteroid.transform.x + Math.random() * 10 - 5
+            y = asteroid.transform.y + Math.random() * 10 - 5
             this.entityCreator.createAsteroid(radius, x, y)
           }
           asteroid.asteroid.fsm.changeState('destroyed')
@@ -75,8 +72,8 @@ export class CollisionSystem extends System {
         asteroid = asteroid.next
       ) {
         const distance = TransformComponent.distance(
-          asteroid.position,
-          spaceship.position,
+          asteroid.transform,
+          spaceship.transform,
         )
         if (
           distance <=

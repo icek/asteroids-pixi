@@ -8,13 +8,13 @@ import {
 
 export class GunControlNode extends Node {
   @keep(GunControlsComponent)
-  public control!: GunControlsComponent
+  public controls!: GunControlsComponent
 
   @keep(GunComponent)
   public gun!: GunComponent
 
   @keep(TransformComponent)
-  public position!: TransformComponent
+  public transform!: TransformComponent
 
   @keep(AudioComponent)
   public audio!: AudioComponent
