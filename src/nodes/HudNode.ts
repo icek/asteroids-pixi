@@ -1,10 +1,10 @@
 import { Node, keep } from '@ash.ts/ash'
-import { GameState, Hud } from '../components'
+import { GameStateComponent, HudComponent } from '../components'
 
 export class HudNode extends Node {
-  @keep(GameState)
-  public state!: GameState
+  @keep(GameStateComponent)
+  public state!: GameStateComponent
 
-  @keep(Hud)
-  public hud!: Hud
+  @keep(HudComponent)
+  public hud!: HudComponent
 }

@@ -1,4 +1,4 @@
-export class MotionControls {
+export class MotionControlsComponent {
   public left: number
 
   public right: number

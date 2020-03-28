@@ -1,6 +1,6 @@
 import { Sounds } from '../sounds'
 
-export class Audio {
+export class AudioComponent {
   public toPlay: Sounds[] = []
 
   public play(sound: Sounds): void {

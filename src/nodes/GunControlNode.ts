@@ -1,16 +1,21 @@
 import { Node, keep } from '@ash.ts/ash'
-import { Audio, Gun, GunControls, Position } from '../components'
+import {
+  AudioComponent,
+  GunComponent,
+  GunControlsComponent,
+  TransformComponent,
+} from '../components'
 
 export class GunControlNode extends Node {
-  @keep(GunControls)
-  public control!: GunControls
+  @keep(GunControlsComponent)
+  public control!: GunControlsComponent
 
-  @keep(Gun)
-  public gun!: Gun
+  @keep(GunComponent)
+  public gun!: GunComponent
 
-  @keep(Position)
-  public position!: Position
+  @keep(TransformComponent)
+  public position!: TransformComponent
 
-  @keep(Audio)
-  public audio!: Audio
+  @keep(AudioComponent)
+  public audio!: AudioComponent
 }

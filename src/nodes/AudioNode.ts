@@ -1,7 +1,7 @@
 import { Node, keep } from '@ash.ts/ash'
-import { Audio } from '../components'
+import { AudioComponent } from '../components'
 
 export class AudioNode extends Node {
-  @keep(Audio)
-  public audio!: Audio
+  @keep(AudioComponent)
+  public audio!: AudioComponent
 }

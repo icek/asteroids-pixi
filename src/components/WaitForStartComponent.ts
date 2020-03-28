@@ -1,6 +1,6 @@
 import { WaitForStartView } from '../graphics'
 
-export class WaitForStart {
+export class WaitForStartComponent {
   public waitForStart: WaitForStartView
 
   public startGame: boolean = false

@@ -1,13 +1,17 @@
 import { Node, keep } from '@ash.ts/ash'
-import { Motion, MotionControls, Position } from '../components'
+import {
+  MotionComponent,
+  MotionControlsComponent,
+  TransformComponent,
+} from '../components'
 
 export class MotionControlNode extends Node {
-  @keep(MotionControls)
-  public control!: MotionControls
+  @keep(MotionControlsComponent)
+  public control!: MotionControlsComponent
 
-  @keep(Position)
-  public position!: Position
+  @keep(TransformComponent)
+  public position!: TransformComponent
 
-  @keep(Motion)
-  public motion!: Motion
+  @keep(MotionComponent)
+  public motion!: MotionComponent
 }

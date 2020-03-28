@@ -1,4 +1,4 @@
-export class Motion {
+export class MotionComponent {
   public velocityX: number
 
   public velocityY: number

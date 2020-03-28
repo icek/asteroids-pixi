@@ -1,6 +1,6 @@
 import { HudView } from '../graphics'
 
-export class Hud {
+export class HudComponent {
   public view: HudView
 
   public constructor(view: HudView) {

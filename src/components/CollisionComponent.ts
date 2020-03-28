@@ -1,4 +1,4 @@
-export class Collision {
+export class CollisionComponent {
   public radius: number
 
   public constructor(radius: number = 0) {

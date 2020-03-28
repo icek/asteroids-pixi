@@ -1,13 +1,17 @@
 import { keep, Node } from '@ash.ts/ash'
-import { Bullet, Collision, Position } from '../components'
+import {
+  BulletComponent,
+  CollisionComponent,
+  TransformComponent,
+} from '../components'
 
 export class BulletCollisionNode extends Node {
-  @keep(Bullet)
-  public bullet!: Bullet
+  @keep(BulletComponent)
+  public bullet!: BulletComponent
 
-  @keep(Position)
-  public position!: Position
+  @keep(TransformComponent)
+  public position!: TransformComponent
 
-  @keep(Collision)
-  public collision!: Collision
+  @keep(CollisionComponent)
+  public collision!: CollisionComponent
 }

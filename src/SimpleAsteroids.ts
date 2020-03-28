@@ -1,6 +1,6 @@
 import { Engine, FrameTickProvider } from '@ash.ts/ash'
 import { EntityCreator } from './EntityCreator'
-import { GameConfig } from './GameConfig'
+import { Viewport } from './Viewport'
 import { KeyPoll } from './KeyPoll'
 import {
   AnimationSystem,
@@ -15,14 +15,13 @@ import {
   MovementSystem,
   RenderSystem,
   SystemPriorities,
-  WaitForStartSystem,
 } from './systems'
 import { loadAudioDB } from './sounds'
 
 export async function asteroids(container: HTMLElement) {
-  const config = new GameConfig(container.clientWidth, container.clientHeight)
+  const viewport = new Viewport(container.clientWidth, container.clientHeight)
   const engine = new Engine()
-  const entityCreator = new EntityCreator(engine, config)
+  const entityCreator = new EntityCreator(engine, viewport)
   const keyPoll = new KeyPoll()
   const tickProvider = new FrameTickProvider()
 
@@ -37,7 +36,7 @@ export async function asteroids(container: HTMLElement) {
   //   SystemPriorities.preUpdate,
   // )
   engine.addSystem(
-    new GameManager(entityCreator, config),
+    new GameManager(entityCreator, viewport),
     SystemPriorities.preUpdate,
   )
   engine.addSystem(new MotionControlSystem(keyPoll), SystemPriorities.update)
@@ -50,7 +49,7 @@ export async function asteroids(container: HTMLElement) {
     new DeathThroesSystem(entityCreator),
     SystemPriorities.update,
   )
-  engine.addSystem(new MovementSystem(config), SystemPriorities.move)
+  engine.addSystem(new MovementSystem(viewport), SystemPriorities.move)
   engine.addSystem(
     new CollisionSystem(entityCreator),
     SystemPriorities.resolveCollisions,

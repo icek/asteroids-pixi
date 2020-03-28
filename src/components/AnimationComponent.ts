@@ -1,6 +1,6 @@
 import { Animatable } from '../graphics'
 
-export class Animation {
+export class AnimationComponent {
   public animation: Animatable
 
   public constructor(animation: Animatable) {

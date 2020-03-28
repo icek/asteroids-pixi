@@ -1,7 +1,7 @@
 import { Node, keep } from '@ash.ts/ash'
-import { Bullet } from '../components'
+import { BulletComponent } from '../components'
 
 export class BulletAgeNode extends Node {
-  @keep(Bullet)
-  public bullet!: Bullet
+  @keep(BulletComponent)
+  public bullet!: BulletComponent
 }

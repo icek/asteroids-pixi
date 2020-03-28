@@ -1,4 +1,4 @@
-export class GunControls {
+export class GunControlsComponent {
   public trigger: number
 
   public constructor(trigger: number = 0) {

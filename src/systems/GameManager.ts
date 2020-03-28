@@ -1,7 +1,7 @@
 import { Engine, NodeList, System } from '@ash.ts/ash'
-import { Position } from '../components'
+import { TransformComponent } from '../components'
 import { EntityCreator } from '../EntityCreator'
-import { GameConfig } from '../GameConfig'
+import { Viewport } from '../Viewport'
 import {
   AsteroidCollisionNode,
   BulletCollisionNode,
@@ -10,7 +10,7 @@ import {
 } from '../nodes'
 
 export class GameManager extends System {
-  private config: GameConfig
+  private viewport: Viewport
 
   private entityCreator: EntityCreator
 
@@ -22,10 +22,10 @@ export class GameManager extends System {
 
   private bullets: NodeList<BulletCollisionNode> | null = null
 
-  public constructor(entityCreator: EntityCreator, config: GameConfig) {
+  public constructor(entityCreator: EntityCreator, viewport: Viewport) {
     super()
     this.entityCreator = entityCreator
-    this.config = config
+    this.viewport = viewport
   }
 
   public addToEngine(engine: Engine): void {
@@ -42,15 +42,15 @@ export class GameManager extends System {
       if (this.spaceships!.empty) {
         if (gameNode.state.lives > 0) {
           console.log('Add spaceship')
-          const newSpaceshipPositionX = this.config.width / 2
-          const newSpaceshipPositionY = this.config.height / 2
+          const newSpaceshipPositionX = this.viewport.width / 2
+          const newSpaceshipPositionY = this.viewport.height / 2
           let clearToAddSpaceship = true
           for (
             let asteroid = this.asteroids!.head;
             asteroid;
             asteroid = asteroid.next
           ) {
-            const distance = Position.distance(asteroid.position, {
+            const distance = TransformComponent.distance(asteroid.position, {
               x: newSpaceshipPositionX,
               y: newSpaceshipPositionY,
             })
@@ -84,10 +84,10 @@ export class GameManager extends System {
           let positionY: number
           // check not on top of spaceship
           do {
-            positionX = Math.random() * this.config.width
-            positionY = Math.random() * this.config.height
+            positionX = Math.random() * this.viewport.width
+            positionY = Math.random() * this.viewport.height
           } while (
-            Position.distance(
+            TransformComponent.distance(
               { x: positionX, y: positionY },
               spaceship.position,
             ) <= 80

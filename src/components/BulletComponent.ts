@@ -1,4 +1,4 @@
-export class Bullet {
+export class BulletComponent {
   public lifeTime: number
 
   public constructor(lifeTime: number) {

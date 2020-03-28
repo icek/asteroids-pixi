@@ -1,10 +1,10 @@
 import { Node, keep } from '@ash.ts/ash'
-import { Display, Position } from '../components'
+import { DisplayComponent, TransformComponent } from '../components'
 
 export class RenderNode extends Node {
-  @keep(Position)
-  public position!: Position
+  @keep(TransformComponent)
+  public position!: TransformComponent
 
-  @keep(Display)
-  public display!: Display
+  @keep(DisplayComponent)
+  public display!: DisplayComponent
 }

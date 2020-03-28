@@ -64,32 +64,30 @@ export class RenderSystem extends System {
       node;
       node = node.next
     ) {
-      this.addToDisplay(node)
+      this.addToStage(node)
     }
-    this.nodes.nodeAdded.add(this.addToDisplay)
-    this.nodes.nodeRemoved.add(this.removeFromDisplay)
+    this.nodes.nodeAdded.add(this.addToStage)
+    this.nodes.nodeRemoved.add(this.removeFromStage)
   }
 
-  private addToDisplay = (node: RenderNode) => {
-    const { displayObject } = node.display
-    this.stage.addChild(displayObject)
+  private addToStage = (node: RenderNode) => {
+    this.stage.addChild(node.display.object)
     if (this.options.emitStageEvents) {
-      displayObject.emit('addedToStage')
+      node.display.object.emit('addedToStage')
     }
   }
 
-  private removeFromDisplay = (node: RenderNode) => {
-    const { displayObject } = node.display
-    this.stage.removeChild(displayObject)
+  private removeFromStage = (node: RenderNode) => {
+    this.stage.removeChild(node.display.object)
     if (this.options.emitStageEvents) {
-      displayObject.emit('removedFromStage')
+      node.display.object.emit('removedFromStage')
     }
   }
 
   public update(time: number): void {
     for (let node = this.nodes!.head; node; node = node.next) {
       const { display, position } = node
-      display.displayObject.setTransform(
+      display.object.setTransform(
         position.x,
         position.y,
         1,

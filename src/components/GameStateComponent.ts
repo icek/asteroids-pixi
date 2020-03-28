@@ -1,4 +1,4 @@
-export class GameState {
+export class GameStateComponent {
   public lives: number = 1
 
   public level: number = 0

@@ -1,18 +1,18 @@
 import { ListIteratingSystem } from '@ash.ts/ash'
-import { GameConfig } from '../GameConfig'
+import { Viewport } from '../Viewport'
 import { MovementNode } from '../nodes'
 
 export class MovementSystem extends ListIteratingSystem<MovementNode> {
-  private readonly config: GameConfig
+  private readonly viewport: Viewport
 
-  public constructor(config: GameConfig) {
+  public constructor(viewport: Viewport) {
     super(MovementNode)
-    this.config = config
+    this.viewport = viewport
   }
 
   public updateNode(node: MovementNode, time: number): void {
     const { position, motion } = node
-    const { width, height } = this.config
+    const { width, height } = this.viewport
     position.x += motion.velocityX * time
     position.y += motion.velocityY * time
     if (position.x < 0) {

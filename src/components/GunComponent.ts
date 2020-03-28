@@ -1,4 +1,4 @@
-export class Gun {
+export class GunComponent {
   public shooting: boolean = false
 
   public timeSinceLastShot: number = 0

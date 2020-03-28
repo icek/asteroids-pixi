@@ -1,5 +1,5 @@
 import { Engine, NodeList, System } from '@ash.ts/ash'
-import { Position } from '../components'
+import { TransformComponent } from '../components'
 import { EntityCreator } from '../EntityCreator'
 import {
   AsteroidCollisionNode,
@@ -39,7 +39,10 @@ export class CollisionSystem extends System {
         asteroid;
         asteroid = asteroid.next
       ) {
-        const distance = Position.distance(asteroid.position, bullet.position)
+        const distance = TransformComponent.distance(
+          asteroid.position,
+          bullet.position,
+        )
         if (distance <= asteroid.collision.radius) {
           this.entityCreator.destroyEntity(bullet.entity)
           if (asteroid.collision.radius > 10) {
@@ -71,7 +74,7 @@ export class CollisionSystem extends System {
         asteroid;
         asteroid = asteroid.next
       ) {
-        const distance = Position.distance(
+        const distance = TransformComponent.distance(
           asteroid.position,
           spaceship.position,
         )
@@ -79,7 +82,7 @@ export class CollisionSystem extends System {
           distance <=
           asteroid.collision.radius + spaceship.collision.radius
         ) {
-          spaceship.spaceship.fsm.changeState('destroyed')
+          spaceship.spaceship.finiteStateMachine.changeState('destroyed')
           spaceship.audio.play(Sounds.ship)
           if (this.games!.head) {
             this.games!.head.state.lives -= 1

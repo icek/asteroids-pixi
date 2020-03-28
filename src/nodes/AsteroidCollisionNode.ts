@@ -1,16 +1,21 @@
 import { keep, Node } from '@ash.ts/ash'
-import { Asteroid, Audio, Collision, Position } from '../components'
+import {
+  AsteroidComponent,
+  AudioComponent,
+  CollisionComponent,
+  TransformComponent,
+} from '../components'
 
 export class AsteroidCollisionNode extends Node {
-  @keep(Asteroid)
-  public asteroid!: Asteroid
+  @keep(AsteroidComponent)
+  public asteroid!: AsteroidComponent
 
-  @keep(Position)
-  public position!: Position
+  @keep(TransformComponent)
+  public position!: TransformComponent
 
-  @keep(Collision)
-  public collision!: Collision
+  @keep(CollisionComponent)
+  public collision!: CollisionComponent
 
-  @keep(Audio)
-  public audio!: Audio
+  @keep(AudioComponent)
+  public audio!: AudioComponent
 }

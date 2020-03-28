@@ -1,7 +1,7 @@
 import { keep, Node } from '@ash.ts/ash'
-import { Animation } from '../components'
+import { AnimationComponent } from '../components'
 
 export class AnimationNode extends Node {
-  @keep(Animation)
-  public animation!: Animation
+  @keep(AnimationComponent)
+  public animation!: AnimationComponent
 }

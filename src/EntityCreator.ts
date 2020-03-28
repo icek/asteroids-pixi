@@ -1,23 +1,23 @@
 import { Engine, Entity, EntityStateMachine } from '@ash.ts/ash'
 import {
-  Animation,
-  Asteroid,
-  Audio,
-  Bullet,
-  Collision,
-  DeathThroes,
-  Display,
-  GameState,
-  Gun,
-  GunControls,
-  Hud,
-  Motion,
-  MotionControls,
-  Position,
-  Spaceship,
-  WaitForStart,
+  AnimationComponent,
+  AsteroidComponent,
+  AudioComponent,
+  BulletComponent,
+  CollisionComponent,
+  DeathThroesComponent,
+  DisplayComponent,
+  GameStateComponent,
+  GunComponent,
+  GunControlsComponent,
+  HudComponent,
+  MotionComponent,
+  MotionControlsComponent,
+  TransformComponent,
+  SpaceshipComponent,
+  WaitForStartComponent,
 } from './components'
-import { GameConfig } from './GameConfig'
+import { Viewport } from './Viewport'
 import {
   AsteroidDeathView,
   AsteroidView,
@@ -32,7 +32,7 @@ import * as Keyboard from './Keyboard'
 export class EntityCreator {
   private waitEntity!: Entity
 
-  constructor(private engine: Engine, private config: GameConfig) {}
+  constructor(private engine: Engine, private viewport: Viewport) {}
 
   public destroyEntity(entity: Entity): void {
     this.engine.removeEntity(entity)
@@ -42,10 +42,10 @@ export class EntityCreator {
     const hud: HudView = new HudView()
 
     const gameEntity: Entity = new Entity('game')
-      .add(new GameState())
-      .add(new Hud(hud))
-      .add(new Display(hud))
-      .add(new Position(this.config.width / 2, 25, 0))
+      .add(new GameStateComponent())
+      .add(new HudComponent(hud))
+      .add(new DisplayComponent(hud))
+      .add(new TransformComponent(this.viewport.width / 2, 25, 0))
     this.engine.addEntity(gameEntity)
     return gameEntity
   }
@@ -55,11 +55,17 @@ export class EntityCreator {
       const waitView: WaitForStartView = new WaitForStartView()
 
       this.waitEntity = new Entity('wait')
-        .add(new WaitForStart(waitView))
-        .add(new Display(waitView))
-        .add(new Position(this.config.width / 2, this.config.height / 2, 0))
+        .add(new WaitForStartComponent(waitView))
+        .add(new DisplayComponent(waitView))
+        .add(
+          new TransformComponent(
+            this.viewport.width / 2,
+            this.viewport.height / 2,
+            0,
+          ),
+        )
     }
-    this.waitEntity.get(WaitForStart)!.startGame = false
+    this.waitEntity.get(WaitForStartComponent)!.startGame = false
     this.engine.addEntity(this.waitEntity)
     return this.waitEntity
   }
@@ -75,27 +81,27 @@ export class EntityCreator {
 
     fsm
       .createState('alive')
-      .add(Motion)
-      .withInstance(new Motion(velocityX, velocityY, angularVelocity))
-      .add(Collision)
-      .withInstance(new Collision(radius))
-      .add(Display)
-      .withInstance(new Display(new AsteroidView(radius)))
+      .add(MotionComponent)
+      .withInstance(new MotionComponent(velocityX, velocityY, angularVelocity))
+      .add(CollisionComponent)
+      .withInstance(new CollisionComponent(radius))
+      .add(DisplayComponent)
+      .withInstance(new DisplayComponent(new AsteroidView(radius)))
 
     const deathView: AsteroidDeathView = new AsteroidDeathView(radius)
     fsm
       .createState('destroyed')
-      .add(DeathThroes)
-      .withInstance(new DeathThroes(3))
-      .add(Display)
-      .withInstance(new Display(deathView))
-      .add(Animation)
-      .withInstance(new Animation(deathView))
+      .add(DeathThroesComponent)
+      .withInstance(new DeathThroesComponent(3))
+      .add(DisplayComponent)
+      .withInstance(new DisplayComponent(deathView))
+      .add(AnimationComponent)
+      .withInstance(new AnimationComponent(deathView))
 
     asteroid
-      .add(new Asteroid(fsm))
-      .add(new Position(x, y, 0))
-      .add(new Audio())
+      .add(new AsteroidComponent(fsm))
+      .add(new TransformComponent(x, y, 0))
+      .add(new AudioComponent())
 
     fsm.changeState('alive')
     this.engine.addEntity(asteroid)
@@ -108,48 +114,63 @@ export class EntityCreator {
 
     fsm
       .createState('playing')
-      .add(Motion)
-      .withInstance(new Motion(0, 0, 0, 15))
-      .add(MotionControls)
+      .add(MotionComponent)
+      .withInstance(new MotionComponent(0, 0, 0, 15))
+      .add(MotionControlsComponent)
       .withInstance(
-        new MotionControls(Keyboard.LEFT, Keyboard.RIGHT, Keyboard.UP, 100, 3),
+        new MotionControlsComponent(
+          Keyboard.LEFT,
+          Keyboard.RIGHT,
+          Keyboard.UP,
+          100,
+          3,
+        ),
       )
-      .add(Gun)
-      .withInstance(new Gun(8, 0, 0.3, 2))
-      .add(GunControls)
-      .withInstance(new GunControls(Keyboard.SPACE))
-      .add(Collision)
-      .withInstance(new Collision(9))
-      .add(Display)
-      .withInstance(new Display(new SpaceshipView()))
+      .add(GunComponent)
+      .withInstance(new GunComponent(8, 0, 0.3, 2))
+      .add(GunControlsComponent)
+      .withInstance(new GunControlsComponent(Keyboard.SPACE))
+      .add(CollisionComponent)
+      .withInstance(new CollisionComponent(9))
+      .add(DisplayComponent)
+      .withInstance(new DisplayComponent(new SpaceshipView()))
 
     const deathView: SpaceshipDeathView = new SpaceshipDeathView()
     fsm
       .createState('destroyed')
-      .add(DeathThroes)
-      .withInstance(new DeathThroes(5))
-      .add(Display)
-      .withInstance(new Display(deathView))
-      .add(Animation)
-      .withInstance(new Animation(deathView))
+      .add(DeathThroesComponent)
+      .withInstance(new DeathThroesComponent(5))
+      .add(DisplayComponent)
+      .withInstance(new DisplayComponent(deathView))
+      .add(AnimationComponent)
+      .withInstance(new AnimationComponent(deathView))
 
     spaceship
-      .add(new Spaceship(fsm))
-      .add(new Position(this.config.width / 2, this.config.height / 2, 0))
-      .add(new Audio())
+      .add(new SpaceshipComponent(fsm))
+      .add(
+        new TransformComponent(
+          this.viewport.width / 2,
+          this.viewport.height / 2,
+          0,
+        ),
+      )
+      .add(new AudioComponent())
 
     fsm.changeState('playing')
     this.engine.addEntity(spaceship)
     return spaceship
   }
 
-  public createUserBullet(gun: Gun, parentPosition: Position): Entity {
+  public createUserBullet(
+    gun: GunComponent,
+    parentPosition: TransformComponent,
+  ): Entity {
     const cos: number = Math.cos(parentPosition.rotation)
     const sin: number = Math.sin(parentPosition.rotation)
     const bullet: Entity = new Entity()
-      .add(new Bullet(gun.bulletLifetime))
+      .add(new BulletComponent(gun.bulletLifetime))
       .add(
-        new Position(
+        new TransformComponent(
           cos * gun.offsetFromParentX -
             sin * gun.offsetFromParentY +
             parentPosition.x,
@@ -159,9 +180,9 @@ export class EntityCreator {
           0,
         ),
       )
-      .add(new Collision(0))
-      .add(new Motion(cos * 150, sin * 150, 0, 0))
-      .add(new Display(new BulletView()))
+      .add(new CollisionComponent(0))
+      .add(new MotionComponent(cos * 150, sin * 150, 0, 0))
+      .add(new DisplayComponent(new BulletView()))
     this.engine.addEntity(bullet)
     return bullet
   }

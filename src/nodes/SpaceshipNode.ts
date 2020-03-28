@@ -1,10 +1,10 @@
 import { Node, keep } from '@ash.ts/ash'
-import { Position, Spaceship } from '../components'
+import { TransformComponent, SpaceshipComponent } from '../components'
 
 export class SpaceshipNode extends Node {
-  @keep(Spaceship)
-  public spaceship!: Spaceship
+  @keep(SpaceshipComponent)
+  public spaceship!: SpaceshipComponent
 
-  @keep(Position)
-  public position!: Position
+  @keep(TransformComponent)
+  public position!: TransformComponent
 }
