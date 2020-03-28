@@ -37,6 +37,7 @@ export class GameManager extends System {
 
   public update(time: number): void {
     const gameNode = this.games!.head
+    // console.log('update', gameNode?.state)
     if (gameNode && gameNode.state.playing) {
       if (this.spaceships!.empty) {
         if (gameNode.state.lives > 0) {
@@ -63,7 +64,8 @@ export class GameManager extends System {
           }
         } else {
           gameNode.state.playing = false
-          this.entityCreator.createWaitForClick()
+          // this.entityCreator.createWaitForClick()
+          gameNode.state.setForStart()
         }
       }
 

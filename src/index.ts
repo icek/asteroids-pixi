@@ -1,4 +1,4 @@
-import { asteroids } from './Asteroids'
+import { asteroids } from './SimpleAsteroids'
 
 window.addEventListener('load', async () => {
   const game = document.getElementById('game')

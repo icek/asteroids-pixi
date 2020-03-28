@@ -39,7 +39,7 @@ export class WaitForStartSystem extends System {
           this.entityCreator.destroyEntity(asteroid.entity)
         }
       }
-
+      console.log('Start!')
       game.state.setForStart()
       waitForStartNode.wait.startGame = false
       if (waitForStartNode.entity) {

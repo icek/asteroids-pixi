@@ -10,6 +10,7 @@ export class WaitForStartView extends PIXI.Container {
 
   public constructor() {
     super()
+    console.log('init WFSV')
 
     const style = {
       fontFamily: 'Arial',
