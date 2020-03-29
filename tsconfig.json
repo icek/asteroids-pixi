@@ -8,6 +8,11 @@
     "declaration": false,
     "removeComments": true,
     "strict": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "baseUrl": "./",
+    "paths": {
+      "@ash.ts/ts": ["./ash/packages/ash/src/index.ts"],
+      "@ash.ts/*": ["./ash/packages/*/src"]
+    }
   }
 }

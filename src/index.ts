@@ -1,10 +1,16 @@
-import { initialiseGame } from './JustShip'
+import { Engine } from '@ash.ts/ts'
+import { EngineStateMachine, EntityStateMachine } from '@ash.ts/fsm'
 
-window.addEventListener('load', async () => {
-  const containerElement = document.getElementById('game')
-  if (!containerElement) {
-    return
-  }
+// import { initialiseGame } from './JustShip'
 
-  await initialiseGame(containerElement)
-})
+// window.addEventListener('load', async () => {
+//   const containerElement = document.getElementById('game')
+//   if (!containerElement) {
+//     return
+//   }
+
+//   await initialiseGame(containerElement)
+// })
+console.log(Engine)
+const engine = new Engine()
+console.log(engine)
