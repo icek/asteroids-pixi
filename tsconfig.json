@@ -8,6 +8,7 @@
     "declaration": false,
     "removeComments": true,
     "strict": true,
+    "alwaysStrict": true,
     "experimentalDecorators": true
   }
 }
