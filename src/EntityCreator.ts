@@ -32,10 +32,13 @@ import * as Keyboard from './Keyboard';
 export class EntityCreator {
   private waitEntity!:Entity;
 
-  constructor(
-    private engine:Engine,
-    private config:GameConfig,
-  ) {
+  private engine:Engine;
+
+  private config:GameConfig;
+
+  public constructor(engine:Engine, config:GameConfig) {
+    this.engine = engine;
+    this.config = config;
   }
 
   public destroyEntity(entity:Entity):void {
@@ -78,15 +81,21 @@ export class EntityCreator {
     const angularVelocity:number = Math.random() * 2 - 1;
 
     fsm.createState('alive')
-      .add(Motion).withInstance(new Motion(velocityX, velocityY, angularVelocity))
-      .add(Collision).withInstance(new Collision(radius))
-      .add(Display).withInstance(new Display(new AsteroidView(radius)));
+      .add(Motion)
+      .withInstance(new Motion(velocityX, velocityY, angularVelocity))
+      .add(Collision)
+      .withInstance(new Collision(radius))
+      .add(Display)
+      .withInstance(new Display(new AsteroidView(radius)));
 
     const deathView:AsteroidDeathView = new AsteroidDeathView(radius);
     fsm.createState('destroyed')
-      .add(DeathThroes).withInstance(new DeathThroes(3))
-      .add(Display).withInstance(new Display(deathView))
-      .add(Animation).withInstance(new Animation(deathView));
+      .add(DeathThroes)
+      .withInstance(new DeathThroes(3))
+      .add(Display)
+      .withInstance(new Display(deathView))
+      .add(Animation)
+      .withInstance(new Animation(deathView));
 
     asteroid
       .add(new Asteroid(fsm))
@@ -103,18 +112,27 @@ export class EntityCreator {
     const fsm:EntityStateMachine = new EntityStateMachine(spaceship);
 
     fsm.createState('playing')
-      .add(Motion).withInstance(new Motion(0, 0, 0, 15))
-      .add(MotionControls).withInstance(new MotionControls(Keyboard.LEFT, Keyboard.RIGHT, Keyboard.UP, 100, 3))
-      .add(Gun).withInstance(new Gun(8, 0, 0.3, 2))
-      .add(GunControls).withInstance(new GunControls(Keyboard.SPACE))
-      .add(Collision).withInstance(new Collision(9))
-      .add(Display).withInstance(new Display(new SpaceshipView()));
+      .add(Motion)
+      .withInstance(new Motion(0, 0, 0, 15))
+      .add(MotionControls)
+      .withInstance(new MotionControls(Keyboard.LEFT, Keyboard.RIGHT, Keyboard.UP, 100, 3))
+      .add(Gun)
+      .withInstance(new Gun(8, 0, 0.3, 2))
+      .add(GunControls)
+      .withInstance(new GunControls(Keyboard.SPACE))
+      .add(Collision)
+      .withInstance(new Collision(9))
+      .add(Display)
+      .withInstance(new Display(new SpaceshipView()));
 
     const deathView:SpaceshipDeathView = new SpaceshipDeathView();
     fsm.createState('destroyed')
-      .add(DeathThroes).withInstance(new DeathThroes(5))
-      .add(Display).withInstance(new Display(deathView))
-      .add(Animation).withInstance(new Animation(deathView));
+      .add(DeathThroes)
+      .withInstance(new DeathThroes(5))
+      .add(Display)
+      .withInstance(new Display(deathView))
+      .add(Animation)
+      .withInstance(new Animation(deathView));
 
     spaceship
       .add(new Spaceship(fsm))
@@ -133,7 +151,9 @@ export class EntityCreator {
       .add(new Bullet(gun.bulletLifetime))
       .add(new Position(
         cos * gun.offsetFromParentX - sin * gun.offsetFromParentY + parentPosition.x,
-        sin * gun.offsetFromParentX + cos * gun.offsetFromParentY + parentPosition.y, 0))
+        sin * gun.offsetFromParentX + cos * gun.offsetFromParentY + parentPosition.y,
+        0,
+      ))
       .add(new Collision(0))
       .add(new Motion(cos * 150, sin * 150, 0, 0))
       .add(new Display(new BulletView()));

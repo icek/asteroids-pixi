@@ -1,34 +1,56 @@
 {
   "name": "asteroids-pixi",
+  "private": true,
   "version": "1.0.0",
-  "description": "",
-  "main": "rollup.asteroids.js",
+  "description": "Ash.ts Engine demo - Asteroids",
+  "keywords": ["ash.ts", "ecs" ,"game", "asteroids"],
+  "license": "MIT",
+  "author": "Grzegorz Michlicki <grzegorz@michlicki.pl>",
   "scripts": {
     "prestart": "rimraf dist",
-    "start": "parcel src/index.html --no-cache --port 1235",
+    "start": "parcel src/index.html --no-cache",
     "prebuild": "rimraf dist",
-    "build": "parcel build src/index.html --no-cache --public-url .",
-    "lint": "eslint src/**/*.ts"
+    "build": "rollup -c",
+    "typecheck": "tsc --noEmit -p ./tsconfig.json",
+    "lint": "eslint 'src/**/*.ts'",
+    "lint-fix": "eslint 'src/**/*.ts' --fix"
   },
-  "keywords": [],
-  "author": "Grzegorz Michlicki <grzegorz@michlicki.pl>",
-  "license": "MIT",
   "dependencies": {
-    "@ash.ts/ash": "^1.0.2",
-    "pixi.js": "^5.0.4"
+    "@ash.ts/ash": "^1.3.0",
+    "pixi.js": "^5.2.3"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^1.13.0",
-    "@typescript-eslint/parser": "^1.13.0",
-    "eslint": "^6.1.0",
-    "eslint-config-airbnb-base": "^13.2.0",
-    "eslint-import-resolver-typescript": "^1.1.1",
-    "eslint-plugin-import": "^2.18.2",
-    "parcel": "^1.12.3",
-    "rimraf": "^2.6.3",
-    "typescript": "^3.5.3"
+    "@rollup/plugin-commonjs": "^11.1.0",
+    "@rollup/plugin-html": "^0.1.1",
+    "@rollup/plugin-node-resolve": "^7.1.3",
+    "@rollup/plugin-url": "^4.0.2",
+    "@typescript-eslint/eslint-plugin": "^2.29.0",
+    "@typescript-eslint/parser": "^2.29.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-import-resolver-typescript": "^2.0.0",
+    "eslint-plugin-import": "^2.20.2",
+    "husky": "^4.2.5",
+    "noyarn": "^0.3.0",
+    "npm-run-all": "^4.1.5",
+    "parcel": "^1.12.4",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.7.2",
+    "rollup-plugin-terser": "^5.3.0",
+    "rollup-plugin-typescript2": "^0.27.0",
+    "typescript": "^3.8.3"
   },
   "browserslist": [
     "last 1 Chrome version"
-  ]
+  ],
+  "engines": {
+    "node": ">=12",
+    "npm": ">=6",
+    "yarn": "Please use npm >= 6"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "run-s typecheck lint"
+    }
+  }
 }

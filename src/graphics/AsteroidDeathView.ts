@@ -3,7 +3,7 @@ import { Animatable } from './Animatable';
 import { Dot } from './Dot';
 
 export class AsteroidDeathView extends PIXI.Container implements Animatable {
-  private static numDots:number = 8;
+  private static numDots = 8;
 
   private dots:Dot[] = [];
 

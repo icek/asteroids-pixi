@@ -5,3 +5,14 @@ node_modules
 
 # Files
 npm-debug.log
+yarn.lock
+.DS_Store
+
+# Editor directories and files
+.idea
+*.iml
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln

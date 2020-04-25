@@ -1,7 +1,7 @@
 export class Gun {
-  public shooting:boolean = false;
+  public shooting = false;
 
-  public timeSinceLastShot:number = 0;
+  public timeSinceLastShot = 0;
 
   public offsetFromParentX:number;
 
@@ -14,8 +14,8 @@ export class Gun {
   public constructor(
     offsetFromParentX:number,
     offsetFromParentY:number,
-    minimumShotInterval:number = 0,
-    bulletLifetime:number = 0,
+    minimumShotInterval = 0,
+    bulletLifetime = 0,
   ) {
     this.offsetFromParentX = offsetFromParentX;
     this.offsetFromParentY = offsetFromParentY;

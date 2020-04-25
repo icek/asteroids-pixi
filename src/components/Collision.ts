@@ -1,7 +1,7 @@
 export class Collision {
   public radius:number;
 
-  public constructor(radius:number = 0) {
+  public constructor(radius = 0) {
     this.radius = radius;
   }
 }

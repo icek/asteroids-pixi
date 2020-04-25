@@ -1,10 +1,10 @@
-// tslint:disable:no-bitwise
+/* eslint-disable no-bitwise */
 const WORD_SIZE = 32;
 
 export class KeyPoll {
   private keys:Int32Array = new Int32Array(4);
 
-  constructor() {
+  public constructor() {
     window.addEventListener('keyup', this.keyUpHandler);
     window.addEventListener('keydown', this.keyDownHandler);
   }
@@ -18,13 +18,13 @@ export class KeyPoll {
     return !this.isDown(key);
   }
 
-  private keyDownHandler = (event:KeyboardEvent) => {
+  private keyDownHandler = (event:KeyboardEvent):void => {
     const { keyCode } = event;
     const index = Math.floor(keyCode / WORD_SIZE);
     this.keys[index] |= (1 << keyCode - index * WORD_SIZE);
   };
 
-  private keyUpHandler = (event:KeyboardEvent) => {
+  private keyUpHandler = (event:KeyboardEvent):void => {
     const { keyCode } = event;
     const index = Math.floor(keyCode / WORD_SIZE);
     this.keys[index] &= ~(1 << keyCode - index * WORD_SIZE);

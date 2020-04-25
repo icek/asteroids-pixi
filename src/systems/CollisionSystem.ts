@@ -1,5 +1,4 @@
 import { Engine, NodeList, System } from '@ash.ts/ash';
-import { Position } from '../components';
 import { EntityCreator } from '../EntityCreator';
 import { AsteroidCollisionNode, BulletCollisionNode, GameNode, SpaceshipCollisionNode } from '../nodes';
 import { Sounds } from '../sounds';
@@ -30,7 +29,7 @@ export class CollisionSystem extends System {
   public update(time:number):void {
     for (let bullet = this.bullets!.head; bullet; bullet = bullet.next) {
       for (let asteroid = this.asteroids!.head; asteroid; asteroid = asteroid.next) {
-        const distance = Position.distance(asteroid.position, bullet.position);
+        const distance = Math.hypot(asteroid.position.x - bullet.position.x, asteroid.position.y - bullet.position.y);
         if (distance <= asteroid.collision.radius) {
           this.creator.destroyEntity(bullet.entity);
           if (asteroid.collision.radius > 10) {
@@ -54,7 +53,10 @@ export class CollisionSystem extends System {
 
     for (let spaceship = this.spaceships!.head; spaceship; spaceship = spaceship.next) {
       for (let asteroid = this.asteroids!.head; asteroid; asteroid = asteroid.next) {
-        const distance = Position.distance(asteroid.position, spaceship.position);
+        const distance = Math.hypot(
+          asteroid.position.x - spaceship.position.x,
+          asteroid.position.y - spaceship.position.y,
+        );
         if (distance <= asteroid.collision.radius + spaceship.collision.radius) {
           spaceship.spaceship.fsm.changeState('destroyed');
           spaceship.audio.play(Sounds.ship);

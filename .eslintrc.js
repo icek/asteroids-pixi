@@ -38,10 +38,18 @@ module.exports = {
       'ExportDeclaration': { 'consistent': true },
     }],
     'import/prefer-default-export': 'off',
+    'import/extensions': ['error', 'ignorePackages', { js: 'never', mjs: 'never', ts: 'never' }],
 
     '@typescript-eslint/indent': ['error', 2],
-    '@typescript-eslint/type-annotation-spacing': ['error', { before: false, after: false, overrides: { arrow: { before: true, after: true } } }],
-    '@typescript-eslint/explicit-function-return-type': ['error', { allowExpressions: true, allowHigherOrderFunctions: true }],
+    '@typescript-eslint/type-annotation-spacing': ['error', {
+      before: false,
+      after: false,
+      overrides: { arrow: { before: true, after: true } }
+    }],
+    '@typescript-eslint/explicit-function-return-type': ['error', {
+      allowExpressions: true,
+      allowHigherOrderFunctions: true
+    }],
     '@typescript-eslint/no-non-null-assertion': 'off',
     '@typescript-eslint/no-unused-vars': 'off',
     '@typescript-eslint/no-explicit-any': 'off',

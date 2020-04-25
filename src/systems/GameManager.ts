@@ -1,5 +1,4 @@
 import { Engine, NodeList, System } from '@ash.ts/ash';
-import { Position } from '../components';
 import { EntityCreator } from '../EntityCreator';
 import { GameConfig } from '../GameConfig';
 import { AsteroidCollisionNode, BulletCollisionNode, GameNode, SpaceshipNode } from '../nodes';
@@ -35,17 +34,11 @@ export class GameManager extends System {
     if (gameNode && gameNode.state.playing) {
       if (this.spaceships!.empty) {
         if (gameNode.state.lives > 0) {
-          const newSpaceshipPositionX = this.config.width / 2;
-          const newSpaceshipPositionY = this.config.height / 2;
+          const positionX = this.config.width / 2;
+          const positionY = this.config.height / 2;
           let clearToAddSpaceship = true;
           for (let asteroid = this.asteroids!.head; asteroid; asteroid = asteroid.next) {
-            const distance = Position.distance(
-              asteroid.position,
-              {
-                x: newSpaceshipPositionX,
-                y: newSpaceshipPositionY,
-              },
-            );
+            const distance = Math.hypot(asteroid.position.x - positionX, asteroid.position.y - positionY);
             if (distance <= asteroid.collision.radius + 50) {
               clearToAddSpaceship = false;
               break;
@@ -74,7 +67,7 @@ export class GameManager extends System {
             positionX = Math.random() * this.config.width;
             positionY = Math.random() * this.config.height;
           }
-          while (Position.distance({ x: positionX, y: positionY }, spaceship.position) <= 80);
+          while (Math.hypot(positionX - spaceship.position.x, positionY - spaceship.position.y) <= 80);
           this.creator.createAsteroid(30, positionX, positionY);
         }
       }

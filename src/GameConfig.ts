@@ -1,7 +1,10 @@
 export class GameConfig {
-  constructor(
-    public width:number,
-    public height:number,
-  ) {
+  public width:number;
+
+  public height:number;
+
+  public constructor(width:number, height:number) {
+    this.width = width;
+    this.height = height;
   }
 }

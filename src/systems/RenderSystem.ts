@@ -45,7 +45,7 @@ export class RenderSystem extends System {
     this.nodes.nodeRemoved.add(this.removeFromDisplay);
   }
 
-  private addToDisplay = (node:RenderNode) => {
+  private addToDisplay = (node:RenderNode):void => {
     const { displayObject } = node.display;
     this.stage.addChild(displayObject);
     if (this.options.emitStageEvents) {
@@ -53,7 +53,7 @@ export class RenderSystem extends System {
     }
   };
 
-  private removeFromDisplay = (node:RenderNode) => {
+  private removeFromDisplay = (node:RenderNode):void => {
     const { displayObject } = node.display;
     this.stage.removeChild(displayObject);
     if (this.options.emitStageEvents) {

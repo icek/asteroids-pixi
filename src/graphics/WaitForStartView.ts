@@ -38,15 +38,15 @@ export class WaitForStartView extends PIXI.Container {
     this.on('removedFromStage', this.removeClickListener);
   }
 
-  private dispatchClick = () => {
+  private dispatchClick = ():void => {
     this.click.dispatch();
   };
 
-  private addClickListener = () => {
+  private addClickListener = ():void => {
     window.addEventListener('click', this.dispatchClick);
   };
 
-  private removeClickListener = () => {
+  private removeClickListener = ():void => {
     window.removeEventListener('click', this.dispatchClick);
     this.gameOver.text = 'GAME OVER';
   };

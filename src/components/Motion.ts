@@ -10,8 +10,8 @@ export class Motion {
   public constructor(
     velocityX:number,
     velocityY:number,
-    angularVelocity:number = 0,
-    damping:number = 0,
+    angularVelocity = 0,
+    damping = 0,
   ) {
     this.velocityX = velocityX;
     this.velocityY = velocityY;

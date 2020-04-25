@@ -59,7 +59,7 @@ export async function loadAudioDB(audioContext:AudioContext):Promise<Map<Sounds,
   };
 
   if (type) {
-    await Promise.all(sounds.map(sound => loadSound(sound[type!], sound.key)));
+    await Promise.all(sounds.map((sound) => loadSound(sound[type!], sound.key)));
   }
 
   return audioDB;

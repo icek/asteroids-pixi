@@ -3,7 +3,7 @@ import { WaitForStartView } from '../graphics';
 export class WaitForStart {
   public waitForStart:WaitForStartView;
 
-  public startGame:boolean = false;
+  public startGame = false;
 
   public constructor(waitForStart:WaitForStartView) {
     this.waitForStart = waitForStart;

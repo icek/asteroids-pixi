@@ -1,11 +1,11 @@
 export class GameState {
-  public lives:number = 0;
+  public lives = 0;
 
-  public level:number = 0;
+  public level = 0;
 
-  public hits:number = 0;
+  public hits = 0;
 
-  public playing:boolean = false;
+  public playing = false;
 
   public setForStart():void {
     this.lives = 3;
