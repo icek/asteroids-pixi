@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Asteroids</title>
+  <style>
+    html {
+      font-family: Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      position: relative;
+    }
+
+    .ribbon {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+
+    .demo-info a,
+    .demo-info a:hover,
+    .demo-info a:visited {
+      color: inherit;
+    }
+
+    #game {
+      fill: #fff;
+      overflow: hidden;
+      width: 800px;
+      height: 600px;
+      background-color: black;
+    }
+  </style>
+</head>
+<body>
+<a href="https://github.com/icek/asteroids-pixi" class="ribbon"><img width="149" height="149" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_red_aa0000.png?resize=149%2C149" class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a>
+<p class="demo-info">This is an example game developed using <a href="https://icek.github.io/ash">Ash</a> - an Entity Component System framework</p>
+<div id="game">
+  <!-- game -->
+</div>
+<script src="https://www.unpkg.com/pixi.js@^5.2.3/dist/pixi.min.js"></script>
+<script src="https://www.unpkg.com/@ash.ts/ash@^1.3.0/dist/ash.min.js"></script>
+<script src="asteroids.js"></script>
+</body>
+</html>
