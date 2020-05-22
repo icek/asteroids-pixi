@@ -3,7 +3,12 @@
   "private": true,
   "version": "1.0.0",
   "description": "Ash.ts Engine demo - Asteroids",
-  "keywords": ["ash.ts", "ecs" ,"game", "asteroids"],
+  "keywords": [
+    "ash.ts",
+    "ecs",
+    "game",
+    "asteroids"
+  ],
   "license": "MIT",
   "author": "Grzegorz Michlicki <grzegorz@michlicki.pl>",
   "scripts": {
@@ -31,7 +36,6 @@
     "eslint-import-resolver-typescript": "^2.0.0",
     "eslint-plugin-import": "^2.20.2",
     "husky": "^4.2.5",
-    "noyarn": "^0.3.0",
     "npm-run-all": "^4.1.5",
     "parcel": "^1.12.4",
     "rimraf": "^3.0.2",
