@@ -1,5 +1,6 @@
+import { Application, Container, Renderer } from 'pixi.js';
 import { Engine, NodeList, System } from '@ash.ts/ash';
-import * as PIXI from 'pixi.js';
+
 import { RenderNode } from '../nodes';
 
 interface RenderSystemOptions {
@@ -9,9 +10,9 @@ interface RenderSystemOptions {
 export class RenderSystem extends System {
   private nodes:NodeList<RenderNode> | null = null;
 
-  private readonly renderer:PIXI.Renderer;
+  private readonly renderer:Renderer;
 
-  private readonly stage:PIXI.Container;
+  private readonly stage:Container;
 
   private readonly view:HTMLCanvasElement;
 
@@ -24,7 +25,7 @@ export class RenderSystem extends System {
 
     this.container = container;
     this.options = options;
-    const app = new PIXI.Application({
+    const app = new Application({
       width: container.clientWidth,
       height: container.clientHeight,
       backgroundColor: 0,

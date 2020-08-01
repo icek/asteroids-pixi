@@ -1,5 +1,5 @@
 # Asteroids: an example project built with ash.ts entity system framework
-[![Build Status](https://travis-ci.com/icek/asteroids-pixi.svg?branch=master)](https://travis-ci.com/icek/asteroids)
+![Build Status](https://github.com/icek/asteroids-pixi/workflows/Publish/badge.svg)
 
 [Live demo](https://icek.github.io/asteroids-pixi) ([PIXI.js](https://www.pixijs.com/) version)  
 [Edit](https://codesandbox.io/s/q96x4p213q) on CodeSandbox (soundless version)

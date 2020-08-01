@@ -1,10 +1,11 @@
-import * as PIXI from 'pixi.js';
+import { Container, Graphics } from 'pixi.js';
+
 import { Animatable } from './Animatable';
 
-export class SpaceshipDeathView extends PIXI.Container implements Animatable {
-  private readonly shape1:PIXI.Graphics;
+export class SpaceshipDeathView extends Container implements Animatable {
+  private readonly shape1:Graphics;
 
-  private readonly shape2:PIXI.Graphics;
+  private readonly shape2:Graphics;
 
   private readonly vel1x:number;
 
@@ -21,13 +22,13 @@ export class SpaceshipDeathView extends PIXI.Container implements Animatable {
   public constructor() {
     super();
 
-    this.shape1 = new PIXI.Graphics();
+    this.shape1 = new Graphics();
     this.shape1.moveTo(10, 0).beginFill(0xffffff).lineTo(-7, 7).lineTo(-4, 0)
       .lineTo(10, 0)
       .endFill();
     this.addChild(this.shape1);
 
-    this.shape2 = new PIXI.Graphics();
+    this.shape2 = new Graphics();
     this.shape2.moveTo(10, 0).beginFill(0xffffff).lineTo(-7, -7).lineTo(-4, 0)
       .lineTo(10, 0)
       .endFill();

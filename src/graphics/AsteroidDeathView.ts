@@ -1,8 +1,8 @@
-import * as PIXI from 'pixi.js';
+import { Container } from 'pixi.js';
 import { Animatable } from './Animatable';
 import { Dot } from './Dot';
 
-export class AsteroidDeathView extends PIXI.Container implements Animatable {
+export class AsteroidDeathView extends Container implements Animatable {
   private static numDots = 8;
 
   private dots:Dot[] = [];

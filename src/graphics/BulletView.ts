@@ -1,6 +1,6 @@
-import * as PIXI from 'pixi.js';
+import { Graphics } from 'pixi.js';
 
-export class BulletView extends PIXI.Graphics {
+export class BulletView extends Graphics {
   public constructor() {
     super();
 

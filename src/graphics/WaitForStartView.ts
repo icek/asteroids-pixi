@@ -1,10 +1,10 @@
 import { Signal0 } from '@ash.ts/ash';
-import * as PIXI from 'pixi.js';
+import { Container, Text, TextStyle } from 'pixi.js';
 
-export class WaitForStartView extends PIXI.Container {
-  private readonly gameOver:PIXI.Text;
+export class WaitForStartView extends Container {
+  private readonly gameOver:Text;
 
-  private readonly clickToStart:PIXI.Text;
+  private readonly clickToStart:Text;
 
   public click:Signal0 = new Signal0();
 
@@ -17,7 +17,7 @@ export class WaitForStartView extends PIXI.Container {
     };
 
     // GAME OVER
-    this.gameOver = new PIXI.Text('ASTEROIDS', new PIXI.TextStyle({
+    this.gameOver = new Text('ASTEROIDS', new TextStyle({
       ...style,
       fontSize: 50,
     }));
@@ -25,7 +25,7 @@ export class WaitForStartView extends PIXI.Container {
 
     this.addChild(this.gameOver);
 
-    this.clickToStart = new PIXI.Text('Click to start', new PIXI.TextStyle({
+    this.clickToStart = new Text('Click to start', new TextStyle({
       ...style,
       fontSize: 20,
     }));

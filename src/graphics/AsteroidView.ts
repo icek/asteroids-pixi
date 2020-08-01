@@ -1,6 +1,6 @@
-import * as PIXI from 'pixi.js';
+import { Graphics } from 'pixi.js';
 
-export class AsteroidView extends PIXI.Graphics {
+export class AsteroidView extends Graphics {
   public constructor(radius:number) {
     super();
 

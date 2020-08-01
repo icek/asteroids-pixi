@@ -1,6 +1,6 @@
-import * as PIXI from 'pixi.js';
+import { Graphics } from 'pixi.js';
 
-export class Dot extends PIXI.Graphics {
+export class Dot extends Graphics {
   public velocityX:number;
 
   public velocityY:number;
